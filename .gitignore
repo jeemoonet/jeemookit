@@ -1,0 +1,17 @@
+# Skill runtime dependencies (installed by install.ps1)
+skills/*/node_modules/
+skills/*/.cache/
+
+# Local install test
+test-project/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
+
+# 密钥与敏感信息 — 永不提交
+*.pem
+*.key
+secrets.env
+**/secrets.local.json

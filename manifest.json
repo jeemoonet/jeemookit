@@ -1,0 +1,29 @@
+{
+  "name": "jeemookit",
+  "version": "1.2.0",
+  "description": "Jeemoo 新项目模板：全局 Skills、项目 AGENT.md 与部署元数据",
+  "skills": [
+    {
+      "id": "markdown-to-word",
+      "version": "1.0.0",
+      "path": "skills/markdown-to-word",
+      "install": {
+        "npm": true,
+        "pip": "scripts/requirements.txt"
+      }
+    },
+    {
+      "id": "design-doc-figures",
+      "version": "1.0.0",
+      "path": "skills/design-doc-figures",
+      "install": {
+        "npm": false,
+        "pip": false
+      }
+    }
+  ],
+  "templates": {
+    "agent": "templates/AGENT.md",
+    "project": "templates/.jeemoo/project.json"
+  }
+}

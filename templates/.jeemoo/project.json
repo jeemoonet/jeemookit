@@ -1,0 +1,22 @@
+{
+  "$schema": "https://jeemoo.net/schemas/jeemookit-project-v1.json",
+  "name": "YOUR_PROJECT_NAME",
+  "deploy": {
+    "serverId": "JeemooApps",
+    "remotePath": "/home/ubuntu/YOUR_PROJECT_NAME",
+    "service": "",
+    "port": null,
+    "domain": "",
+    "updateScript": ""
+  },
+  "permissions": {
+    "agentCanDeploy": false,
+    "agentCanModifyServer": false,
+    "requireConfirmBeforeDeploy": true
+  },
+  "_comment": {
+    "serverId": "对应 ~/.jeemoo/servers.json 中的 id",
+    "keyFile": "不在此配置，由 servers.json + ~/.jeemoo/keys/ 解析",
+    "permissions": "控制 Agent 是否可自动部署/改服务器配置"
+  }
+}

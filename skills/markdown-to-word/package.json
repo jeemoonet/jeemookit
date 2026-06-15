@@ -1,0 +1,9 @@
+{
+  "name": "markdown-to-word",
+  "private": true,
+  "description": "Mermaid CLI for md2docx export",
+  "dependencies": {
+    "@mermaid-js/mermaid-cli": "^11.4.0",
+    "puppeteer": "^24.0.0"
+  }
+}
