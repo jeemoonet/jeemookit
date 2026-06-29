@@ -51,6 +51,29 @@ function Install-ProjectJeemoo {
     }
 }
 
+function Install-ProjectScripts {
+    param([string]$Root)
+
+    $templateDir = Join-Path $KitRoot 'templates\scripts'
+    $targetDir = Join-Path $Root 'scripts'
+
+    if (-not (Test-Path $templateDir)) { return }
+
+    Write-Step "Install project scripts to $targetDir"
+    New-Item -ItemType Directory -Force -Path $targetDir | Out-Null
+
+    Get-ChildItem -Path $templateDir -File | ForEach-Object {
+        $targetFile = Join-Path $targetDir $_.Name
+        if (Test-Path $targetFile) {
+            Write-Host "  $($_.Name) exists, skipped" -ForegroundColor Yellow
+            return
+        }
+
+        Copy-Item $_.FullName $targetFile -Force
+        Write-Host "  wrote $targetFile" -ForegroundColor Green
+    }
+}
+
 if (-not (Test-Path $ManifestPath)) {
     throw 'manifest.json not found. Run install.ps1 from jeemookit directory.'
 }
@@ -88,7 +111,7 @@ if (-not $AgentOnly) {
             Write-Warning 'python not found, skip pip'
         }
         if (-not (Test-CommandExists 'npm')) {
-            Write-Warning 'npm not found, skip npm (markdown-to-word needs Node.js)'
+            Write-Warning 'npm not found, skip npm (md-to-word needs Node.js)'
         }
 
         foreach ($skill in $manifest.skills) {
@@ -143,6 +166,7 @@ if (-not $SkillsOnly) {
 
 if (-not $SkillsOnly) {
     Install-ProjectJeemoo -Root $ProjectRoot
+    Install-ProjectScripts -Root $ProjectRoot
 }
 
 Write-Host ''
@@ -151,6 +175,7 @@ Write-Host "  Global skills:  $UserSkills"
 if (-not $SkillsOnly) {
     Write-Host "  Project AGENT.md: $(Join-Path $ProjectRoot 'AGENT.md')"
     Write-Host "  Project config:   $(Join-Path $ProjectRoot '.jeemoo\project.json')"
+    Write-Host "  Project scripts:  $(Join-Path $ProjectRoot 'scripts')"
 }
 Write-Host ''
 Write-Host 'Next steps:'

@@ -154,6 +154,32 @@ install_project_jeemoo() {
   cp "$template_dir/.gitignore" "$target_dir/.gitignore"
 }
 
+install_project_scripts() {
+  local template_dir="$KIT_ROOT/templates/scripts"
+  local target_dir="$PROJECT_ROOT/scripts"
+
+  [[ -d "$template_dir" ]] || return
+
+  step "Installing project scripts to $target_dir"
+  mkdir -p "$target_dir"
+
+  for file in "$template_dir"/*; do
+    [[ -f "$file" ]] || continue
+    local name
+    name="$(basename "$file")"
+    local target_file="$target_dir/$name"
+
+    if [[ -f "$target_file" ]]; then
+      echo "  $name exists, skipped"
+      continue
+    fi
+
+    cp "$file" "$target_file"
+    chmod +x "$target_file" 2>/dev/null || true
+    echo "  wrote $target_file"
+  done
+}
+
 if [[ "$AGENT_ONLY" != true ]]; then
   install_skills
 fi
@@ -164,6 +190,7 @@ fi
 
 if [[ "$SKILLS_ONLY" != true ]]; then
   install_project_jeemoo
+  install_project_scripts
 fi
 
 echo
@@ -172,6 +199,7 @@ echo "  Global skills:  $USER_SKILLS"
 if [[ "$SKILLS_ONLY" != true ]]; then
   echo "  Project AGENT.md: $PROJECT_ROOT/AGENT.md"
   echo "  Project config:   $PROJECT_ROOT/.jeemoo/project.json"
+  echo "  Project scripts:  $PROJECT_ROOT/scripts"
 fi
 echo
 echo "Next steps:"

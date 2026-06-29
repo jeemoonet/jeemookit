@@ -1,24 +1,42 @@
 {
   "name": "jeemookit",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Jeemoo 新项目模板：全局 Skills、项目 AGENT.md 与部署元数据",
   "skills": [
     {
-      "id": "markdown-to-word",
+      "id": "md-to-word",
       "version": "1.0.0",
-      "path": "skills/markdown-to-word",
+      "path": "skills/md-to-word",
       "install": {
         "npm": true,
         "pip": "scripts/requirements.txt"
       }
     },
     {
-      "id": "design-doc-figures",
+      "id": "pdf-to-md",
       "version": "1.0.0",
-      "path": "skills/design-doc-figures",
+      "path": "skills/pdf-to-md",
+      "install": {
+        "npm": false,
+        "pip": "scripts/requirements.txt"
+      }
+    },
+    {
+      "id": "txt-to-image",
+      "version": "1.0.0",
+      "path": "skills/txt-to-image",
       "install": {
         "npm": false,
         "pip": false
+      }
+    },
+    {
+      "id": "md-to-feishu",
+      "version": "1.2.0",
+      "path": "skills/md-to-feishu",
+      "install": {
+        "npm": false,
+        "pip": "scripts/requirements.txt"
       }
     }
   ],
