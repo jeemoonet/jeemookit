@@ -38,6 +38,15 @@
         "npm": false,
         "pip": "scripts/requirements.txt"
       }
+    },
+    {
+      "id": "feishu-to-md",
+      "version": "1.0.0",
+      "path": "skills/feishu-to-md",
+      "install": {
+        "npm": false,
+        "pip": "scripts/requirements.txt"
+      }
     }
   ],
   "templates": {
