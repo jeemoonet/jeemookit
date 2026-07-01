@@ -38,4 +38,4 @@ python ~/.cursor/skills/feishu-to-md/scripts/feishu2md.py login
 | 提示未授权/token 过期 | 重新执行 `login` |
 | `scope` 或权限不足 | 在应用后台补齐权限并发布版本 |
 | wiki 链接无法解析 | 补开 `wiki:wiki:readonly` 并确认链接有效 |
-| 图片下载失败 | 文档会保留远程 URL，不影响主文内容 |
+| 图片下载失败 | 文档会保留远程 URL，不影响主文内容（成功下载的图片保存在输出目录 `assets/`） |

@@ -44,7 +44,7 @@ python ~/.cursor/skills/feishu-to-md/scripts/feishu2md.py "doxcnXXXXXXXXXXXX" --
 
 - **标题**：默认使用飞书文档标题作为 `.md` 文件名。
 - **结构**：优先使用飞书 `raw_content`，保留标题层级、列表、代码块、表格。
-- **图片**：尝试下载飞书图片到 `<标题>_assets/`，并替换为相对路径。
+- **图片**：尝试下载飞书图片到输出目录下的 `assets/`，并替换为相对路径（如 `assets/xxx.png`）。
 
 ## 限制
 

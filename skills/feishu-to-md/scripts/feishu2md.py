@@ -310,6 +310,8 @@ def render_blocks_to_markdown(
                     md_level = min(level + 1, 6)
                     append_line(f"{'#' * md_level} {text}")
                     append_line("")
+                for child_id in block.get("children") or []:
+                    render_block(child_id, list_level, list_kind)
                 return
 
         if block.get("bullet"):
@@ -333,6 +335,8 @@ def render_blocks_to_markdown(
             if text:
                 append_line(f"> {text}")
                 append_line("")
+            for child_id in block.get("children") or []:
+                render_block(child_id, list_level, list_kind)
             return
 
         if block.get("code"):
@@ -343,6 +347,8 @@ def render_blocks_to_markdown(
             append_line(code_text)
             append_line("```")
             append_line("")
+            for child_id in block.get("children") or []:
+                render_block(child_id, list_level, list_kind)
             return
 
         if block.get("text"):
@@ -350,6 +356,8 @@ def render_blocks_to_markdown(
             if text:
                 append_line(text)
                 append_line("")
+            for child_id in block.get("children") or []:
+                render_block(child_id, list_level, list_kind)
             return
 
         for child_id in block.get("children") or []:
@@ -390,6 +398,7 @@ def download_feishu_images(
     domain: str,
     access_token: str,
     assets_dir: Path,
+    file_prefix: str,
 ) -> tuple[str, list[str]]:
     assets_dir.mkdir(parents=True, exist_ok=True)
     warnings: list[str] = []
@@ -426,7 +435,7 @@ def download_feishu_images(
             )
             resp.raise_for_status()
             ext = infer_extension(download_url, resp.headers.get("Content-Type"))
-            local_name = f"image-{image_index:03d}{ext}"
+            local_name = f"{file_prefix}-image-{image_index:03d}{ext}"
             image_index += 1
             local_path = assets_dir / local_name
             local_path.write_bytes(resp.content)
@@ -471,7 +480,7 @@ def pull_feishu_doc(
 
     warnings: list[str] = []
     markdown = blocks_markdown
-    assets_dir = md_path.with_name(f"{md_path.stem}_assets")
+    assets_dir = output_dir / "assets"
 
     if localize_images:
         markdown, warnings = download_feishu_images(
@@ -479,8 +488,9 @@ def pull_feishu_doc(
             domain=domain,
             access_token=access_token,
             assets_dir=assets_dir,
+            file_prefix=sanitize_filename(md_path.stem).replace(" ", "-"),
         )
-        if not any(assets_dir.iterdir()):
+        if assets_dir.exists() and not any(assets_dir.iterdir()):
             assets_dir.rmdir()
 
     md_path.write_text(markdown, encoding="utf-8")
