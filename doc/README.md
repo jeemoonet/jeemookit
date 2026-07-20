@@ -1,313 +1,400 @@
-# jeemookit 产品介绍说明书
+# jeemookit 产品使用说明书
 
 | 项目 | 内容 |
 |------|------|
 | 产品名称 | jeemookit |
-| 当前版本 | 1.3.0 |
-| 产品定位 | Jeemoo 新项目初始化模板与 Cursor Agent 协作工具包 |
+| 当前版本 | 1.4.0 |
+| 文档类型 | 产品使用说明书 |
 | 适用平台 | Windows / macOS / Linux |
 | 许可协议 | MIT |
 
 ---
 
-## 1. 产品概述
+## 1. 产品是什么
 
-**jeemookit** 面向 **1 人 + AI** 开发模式，在新项目启动时一键注入可复制的工程底座：
+**jeemookit** 是 Jeemoo 的 Cursor Agent 协作工具包：在新项目启动时一键安装全局 Skills、项目 `AGENT.md` 与部署元数据，让「1 人 + AI」能稳定完成文档转换、配图导出、飞书同步与前端落地页设计。
 
-| 能力 | 说明 |
-|------|------|
-| 全局 Skills | 安装至 `~/.cursor/skills/`，跨项目复用文档转换、配图、导出等能力 |
-| 项目 Agent 约定 | `AGENT.md` 定义目录结构、文档规范与协作规则 |
-| 部署元数据 | `.jeemoo/project.json` 记录部署目标与 Agent 权限；密钥本地保管 |
+![开发者使用 jeemookit：文档在 PDF/Word、Markdown、Word 导出与飞书之间流转](assets/jeemookit-usage-guide.png)
 
-jeemookit **不替代**业务框架，专注解决「Agent 能力、文档规范、部署约定如何统一落地」。
+*图：文档生产主链路示意*
 
 ```mermaid
 flowchart LR
-    K[jeemookit] --> S[~/.cursor/skills/]
-    K --> A[AGENT.md]
-    K --> P[.jeemoo/project.json]
-    S --> P1[多项目复用]
-    A --> P2[仓库内约定]
-    P --> P3[部署与权限]
+    I[install 脚本] --> S[~/.cursor/skills/]
+    I --> A[项目 AGENT.md]
+    I --> P[.jeemoo/project.json]
+    S --> U[Cursor Agent 对话触发]
+    U --> D[文档 / 前端任务]
 ```
 
 ---
 
-## 2. 目标用户与场景
+## 2. 使用前准备
 
-### 2.1 目标用户
+### 2.1 环境要求
 
-| 用户类型 | 典型诉求 |
-|----------|----------|
-| 独立开发者 | 快速启动新项目，减少重复配置 |
-| 小团队技术负责人 | 统一 Agent 协作规范与文档标准 |
-| 文档 / 专利撰写者 | Markdown ↔ Word / 飞书；PDF 提取转 MD |
-| Cursor 重度用户 | Skills 全局安装、约定进 Git、密钥不进仓 |
+| 组件 | 要求 |
+|------|------|
+| Cursor | 已安装并可用 Agent |
+| Python | 3.10+（`python` 在 PATH 中） |
+| Node.js | 18+（`md-to-word` / `md-to-feishu` 渲染图表） |
+| 系统 | Windows PowerShell 5.1+ / macOS / Linux |
 
-### 2.2 典型场景
+### 2.2 获取 kit
 
-![jeemookit 用户场景：独立开发者使用 Cursor 编写 Markdown，经配图、导出 Word、同步飞书](assets/jeemookit-user-scenario.png)
+将本仓库克隆到本机固定路径，例如：
 
-*图：1 人 + AI 完成文档编写、配图、导出与协作分享*
+- Windows：`D:\Dev\jeemookit`
+- macOS / Linux：`~/Dev/jeemookit`
 
-| 场景 | 涉及 Skill |
-|------|-----------|
-| 新建 Web / API / 管理后台 | `install.sh` / `install.ps1` |
-| PDF 公文 / 通知 / 扫描件转 MD | `pdf-to-md`（含 OCR） |
-| 编写技术方案 / 功能设计 | `txt-to-image`（Mermaid 结构图） |
-| 撰写专利交底书 | `txt-to-image`（SVG）+ `md-to-word` |
-| 文档协作分享 | `md-to-feishu` |
+后续安装命令均以该路径为 kit 根目录。
 
 ---
 
-## 3. 核心价值
+## 3. 安装与初始化
 
-### 3.1 文档生产链路
+### 3.1 新项目一键初始化（推荐）
 
-内置 Skills 覆盖「PDF 提取 → 编写配图 → 导出 → 协作」：
+**Windows：**
+
+```powershell
+D:\Dev\jeemookit\install.ps1 -ProjectRoot D:\Dev\my-new-project
+```
+
+**macOS / Linux：**
+
+```bash
+chmod +x /path/to/jeemookit/install.sh
+/path/to/jeemookit/install.sh --project-root /path/to/my-new-project
+```
+
+脚本会：
+
+1. 读取 `manifest.json`
+2. 把 Skills 复制到 `~/.cursor/skills/`（Windows：`%USERPROFILE%\.cursor\skills\`）
+3. 按需执行 pip / npm 依赖安装
+4. 向目标项目写入 `AGENT.md`、`.jeemoo/project.json`、启动脚本模板
 
 ```mermaid
 flowchart TB
-    P[PDF 文档]
-    P --> E["pdf-to-md<br/>标题 / 表格 / 图片 / OCR"]
-    E --> A[Markdown]
-    A --> B["txt-to-image<br/>Mermaid / SVG / GenerateImage"]
-    B --> C["md-to-word<br/>导出 .docx"]
-    C --> D["md-to-feishu<br/>同步飞书云文档"]
-    A --> C
-    A --> D
+    A[运行 install] --> B[读 manifest.json]
+    B --> C[安装全局 Skills]
+    B --> D[写入 AGENT.md / .jeemoo]
+    C --> E[pip / npm]
+    D --> F[项目就绪]
+    E --> F
 ```
 
-### 3.2 配置与密钥分离
+### 3.2 常用参数
 
-```mermaid
-flowchart TB
-    subgraph git [进 Git]
-        AG[AGENT.md]
-        PJ[.jeemoo/project.json]
-    end
-    subgraph local [仅本地]
-        SK[~/.cursor/skills/]
-        SE[~/.jeemoo/secrets.env]
-        KY[~/.jeemoo/keys/]
-    end
-    subgraph kit [kit 仓库]
-        MF[manifest.json]
-        SL[skills/]
-    end
-    MF --> SK
-    SL --> SK
+| 参数 | 说明 |
+|------|------|
+| `-ProjectRoot` / `--project-root` | 目标项目路径（不存在则创建） |
+| `-SkillsOnly` / `--skills-only` | 仅更新全局 Skills |
+| `-AgentOnly` / `--agent-only` | 仅复制 AGENT.md 与项目配置 |
+| `-SkipDeps` / `--skip-deps` | 跳过 pip / npm |
+| `-ForceAgent` / `--force-agent` | 覆盖已有 `AGENT.md` |
+| `-ForceProject` / `--force-project` | 覆盖 `.jeemoo/project.json` |
+
+**只升级 Skills（日常最常用）：**
+
+```powershell
+D:\Dev\jeemookit\install.ps1 -SkillsOnly
 ```
 
-| 内容 | 存放位置 | 进 Git |
-|------|----------|--------|
-| Skills 源码 | kit 仓库 → `~/.cursor/skills/` | kit ✅ |
-| AGENT.md | 项目根目录 | 项目 ✅ |
-| 部署元数据 | `.jeemoo/project.json` | 项目 ✅ |
-| API 密钥、SSH 密钥 | `~/.jeemoo/secrets.env`、`keys/` | ❌ |
+```bash
+/path/to/jeemookit/install.sh --skills-only
+```
 
-`project.json` 的 `permissions` 字段控制 Agent 是否可自动部署，默认需人工确认。
+### 3.3 安装后目录
 
-### 3.3 设计原则
+```
+~/.cursor/skills/
+├── pdf-to-md/
+├── word-to-md/
+├── md-to-word/
+├── txt-to-image/
+├── md-to-feishu/
+├── feishu-to-md/
+└── design-taste-frontend/
 
-1. **关注点分离** — Skills 全局、约定进仓、密钥本地
-2. **声明式清单** — `manifest.json` 驱动安装，无硬编码
-3. **可组合 Skill 链** — `md-to-feishu` 复用 `md-to-word` 渲染管线
-4. **Agent 友好** — 模板与 Skill 提供明确工作流
-5. **渐进式安装** — 支持 `--skills-only`、`--agent-only` 等粒度
+my-app/
+├── AGENT.md
+├── .jeemoo/
+│   ├── project.json
+│   └── .gitignore
+└── scripts/          # start.sh / start.ps1（若模板已提供）
+```
+
+安装完成后：**新开一个 Cursor Agent 对话**，Skills 才会被重新发现。
 
 ---
 
-## 4. 内置 Skills
+## 4. 在 Cursor 里怎么用
 
-### 4.1 总览
+### 4.1 基本方式
 
-| Skill | 版本 | 功能 | 依赖 |
-|-------|------|------|------|
-| `pdf-to-md` | 1.0.0 | PDF → Markdown；标题、表格、图片提取；扫描件 OCR | Python 3.10+ |
-| `md-to-word` | 1.0.0 | MD → Word；Mermaid / SVG / 图片渲染嵌入 | Python 3.10+、Node.js 18+ |
-| `txt-to-image` | 1.0.0 | 文档配图规范（见下表） | 无 |
-| `md-to-feishu` | 1.2.0 | MD → 飞书云文档（默认格式同步） | Python、`requests`、飞书 OAuth |
+在 Agent 对话中用自然语言描述任务即可，例如：
 
-### 4.2 txt-to-image · 三类配图
+| 你想说 | Agent 会调用的 Skill |
+|--------|----------------------|
+| 「把这份 PDF 转成 Markdown」 | `pdf-to-md` |
+| 「Word 转 MD」 | `word-to-md` |
+| 「给设计文档画架构图 / 导出 Word」 | `txt-to-image` → `md-to-word` |
+| 「上传到飞书」 | `md-to-feishu` |
+| 「把飞书文档下载成 md」 | `feishu-to-md` |
+| 「按 taste-skill 做落地页」 | `design-taste-frontend` |
 
-| 类型 | 适用 | 格式 | 工具 | 存放 |
-|------|------|------|------|------|
-| 结构图 | 架构、流程、时序 | Mermaid | Agent 编写 | 内嵌 Markdown |
-| 专利图 | 交底书附图 | SVG | Agent 编写 | `assets/图N-描述.svg` |
-| 宣传图 | 用户场景、主视觉 | PNG | GenerateImage | `assets/主题-简述.png` |
+也可以显式点名：`用 design-taste-frontend`、`@skills/txt-to-image`。
 
-专利图禁用 GenerateImage；外部图统一放文档同级 `assets/`（`pdf-to-md` 默认输出 `<文件名>_assets/`）。
+### 4.2 文档生产主链路
 
-### 4.3 pdf-to-md
+```mermaid
+flowchart TB
+    PDF[PDF] --> P2M[pdf-to-md]
+    DOCX[Word .docx] --> W2M[word-to-md]
+    FS[飞书云文档] --> F2M[feishu-to-md]
+    P2M --> MD[Markdown]
+    W2M --> MD
+    F2M --> MD
+    MD --> IMG[txt-to-image 配图]
+    IMG --> M2W[md-to-word]
+    IMG --> M2F[md-to-feishu]
+    MD --> M2W
+    MD --> M2F
+```
 
-将 PDF 转为可编辑 Markdown，支持可选文本 PDF 与扫描件 OCR（中文）：
+建议顺序：**导入 → 编写/配图 → 导出 Word 或同步飞书**。
 
-| 内容 | 文本 PDF | 扫描 PDF |
-|------|----------|----------|
-| 标题层级 | 字体大小 + 加粗 | OCR + 公文格式（一、二、） |
-| 表格 | pdfplumber → MD 表格 | 简单列对齐；复杂表单保留页图 |
-| 图片 | 提取嵌入图 | 表单页导出 PNG |
+---
+
+## 5. Skills 使用说明
+
+以下路径以 macOS/Linux 为例；Windows 将 `~/.cursor/skills/` 换成 `$env:USERPROFILE\.cursor\skills\`。
+
+### 5.1 pdf-to-md · PDF → Markdown
+
+**用途：** 文本 PDF / 扫描件（中文 OCR）转可编辑 Markdown。
 
 ```bash
 python ~/.cursor/skills/pdf-to-md/scripts/pdf2md.py "路径/文档.pdf"
 python ~/.cursor/skills/pdf-to-md/scripts/pdf2md.py "文档.pdf" -o "输出/文档.md"
 ```
 
-图片默认保存至 `<md文件名>_assets/`。转换后可衔接 `md-to-word`、`md-to-feishu` 继续导出。
+| 内容 | 文本 PDF | 扫描 PDF |
+|------|----------|----------|
+| 标题 | 字体大小 + 加粗 | OCR + 公文格式（一、二、） |
+| 表格 | → MD 表格 | 简单列对齐；复杂表单保留页图 |
+| 图片 | 提取嵌入图 | 表单页导出 PNG |
 
-### 4.4 md-to-word
+图片默认在 `<md文件名>_assets/`。
 
-将含 Mermaid、SVG、图片的 Markdown 导出为 `.docx`：
+### 5.2 word-to-md · Word → Markdown
 
-| Markdown 元素 | 处理方式 |
-|---------------|----------|
-| ` ```mermaid ` | mermaid-cli 渲染 PNG 嵌入 |
-| `**图N**（`assets/xxx.svg`）` | Chromium 渲染 SVG 嵌入 |
-| `![](assets/xxx.png)` | 直接嵌入 |
+**用途：** `.docx` 转 MD（标题 / 列表 / 表格 / 图片）。不支持旧版 `.doc`。
+
+```bash
+python ~/.cursor/skills/word-to-md/scripts/docx2md.py "路径/文档.docx"
+python ~/.cursor/skills/word-to-md/scripts/docx2md.py "文档.docx" -o "输出/文档.md"
+```
+
+### 5.3 txt-to-image · 文档配图
+
+**用途：** 为 Markdown 选对配图方式（规范型 Skill，无独立脚本）。
+
+| 类型 | 适用 | 格式 | 存放 |
+|------|------|------|------|
+| 结构图 | 架构、流程、时序 | Mermaid 代码块 | 内嵌 MD |
+| 专利图 | 交底书附图 | SVG | `assets/图N-描述.svg` |
+| 宣传图 | 场景、主视觉 | PNG（GenerateImage） | `assets/主题-简述.png` |
+
+对话示例：「给技术方案补整体架构 Mermaid」「专利交底书画图 1」「产品说明书加用户场景图」。
+
+专利图禁用 GenerateImage；外部图统一放文档同级 `assets/`。
+
+### 5.4 md-to-word · Markdown → Word
+
+**用途：** 导出 `.docx`，自动渲染 Mermaid / SVG / 图片。
 
 ```bash
 python ~/.cursor/skills/md-to-word/scripts/md2docx.py "路径/文档.md"
 ```
 
-缓存：项目根 `.cache/md2docx/`。
+缓存目录：项目根 `.cache/md2docx/`。
 
-### 4.5 md-to-feishu
+### 5.5 md-to-feishu · Markdown → 飞书
 
-默认**格式同步**，复用 `md-to-word` 渲染后再导入飞书：
+**用途：** 上传为飞书云文档；默认经 `md-to-word` 渲染后再导入（格式同步）。
 
-```mermaid
-sequenceDiagram
-    participant U as 用户
-    participant F as md2feishu
-    participant W as md-to-word
-    participant FS as 飞书
+**首次配置：**
 
-    U->>F: 上传 .md
-    F->>W: md2docx 渲染
-    W-->>F: .docx
-    F->>FS: 导入云文档
-    FS-->>U: 文档链接
-```
+1. 复制 `templates/secrets.env.example` → `~/.jeemoo/secrets.env`
+2. 填写 `FEISHU_APP_ID`、`FEISHU_APP_SECRET` 等
+3. 登录：
 
 ```bash
-python ~/.cursor/skills/md-to-feishu/scripts/md2feishu.py login   # 首次 OAuth
-python ~/.cursor/skills/md-to-feishu/scripts/md2feishu.py "路径/文档.md"
+python ~/.cursor/skills/md-to-feishu/scripts/md2feishu.py login
 ```
 
-凭证：`~/.jeemoo/secrets.env`（参考 `templates/secrets.env.example`）。
+**上传：**
+
+```bash
+python ~/.cursor/skills/md-to-feishu/scripts/md2feishu.py "路径/文档.md"
+python ~/.cursor/skills/md-to-feishu/scripts/md2feishu.py "文档.md" -t "自定义标题"
+python ~/.cursor/skills/md-to-feishu/scripts/md2feishu.py "文档.md" --no-sync   # 原始 MD，不渲染图表
+```
 
 | 模式 | 上限 | 说明 |
 |------|------|------|
 | 默认同步 | 600MB | Mermaid / SVG 可渲染 |
-| `--no-sync` | 20MB | 原始 MD，不渲染图表 |
+| `--no-sync` | 20MB | 原始 MD |
 
----
+### 5.6 feishu-to-md · 飞书 → Markdown
 
-## 5. 安装与使用
-
-### 5.1 环境要求
-
-Cursor IDE · Python 3.10+ · Node.js 18+ · Windows（PS 5.1+）/ macOS / Linux
-
-### 5.2 一键初始化
+**用途：** 拉取飞书云文档为本地 MD（尽量保留标题、表格，并本地化图片）。
 
 ```bash
-# macOS / Linux
-chmod +x /path/to/jeemookit/install.sh
-/path/to/jeemookit/install.sh --project-root /path/to/my-new-project
+python ~/.cursor/skills/feishu-to-md/scripts/feishu2md.py login
+python ~/.cursor/skills/feishu-to-md/scripts/feishu2md.py "https://xxx.feishu.cn/docx/XXXXXXXXXXXX"
+python ~/.cursor/skills/feishu-to-md/scripts/feishu2md.py "doxcnXXXXXXXXXXXX" -o ./doc
 ```
 
-```powershell
-# Windows
-D:\Dev\jeemookit\install.ps1 -ProjectRoot D:\Dev\my-new-project
+凭证与 `md-to-feishu` 共用 `~/.jeemoo/secrets.env`。
+
+### 5.7 design-taste-frontend · 前端落地页 / 改版
+
+**用途：** Anti-slop 前端（落地页、作品集、营销站、UI 改版）。不适用仪表盘、复杂数据表、多步表单。
+
+对话示例：
+
+- 「用 design-taste-frontend 做 SaaS 落地页」
+- 「按 taste-skill 改版现有首页」
+
+Agent 会按序：**Brief 推断 → 三档 Dial → 选型 → 实现 → Pre-Flight**。细则见该 Skill 的 `reference.md`。
+
+---
+
+## 6. 典型任务手册
+
+### 6.1 新开业务项目
+
+1. 运行 `install.ps1` / `install.sh`，指定 `-ProjectRoot`
+2. 编辑项目 `AGENT.md`（目录约定、启动脚本）
+3. 按需填写 `.jeemoo/project.json` 的部署目标
+4. 用 `scripts/start.sh` 或 `scripts/start.ps1` 启动前后端（若已生成）
+
+### 6.2 公文 / 扫描 PDF 转可编辑稿
+
+1. 「把 `xxx.pdf` 转成 Markdown」
+2. 检查生成的 `.md` 与 `_assets/`
+3. 需要交付时：「导出 Word」或「上传到飞书」
+
+### 6.3 写技术方案并出 Word
+
+1. 在 `doc/` 下编写 Markdown
+2. 「按 txt-to-image 补架构 Mermaid」
+3. 「导出 Word」
+
+### 6.4 专利交底书
+
+1. 编写交底书 MD
+2. 「画专利附图（SVG，图号对齐）」
+3. 「导出 Word」交付
+
+### 6.5 飞书双向协作
+
+1. 本地 MD →「上传到飞书」
+2. 飞书修订后 →「把该飞书文档下载成 md」
+3. 继续本地编辑后再次同步
+
+### 6.6 营销落地页
+
+1. 「用 design-taste-frontend 做落地页，受众是 …，风格接近 …」
+2. 确认 Agent 给出的 Design Read 与 Dial
+3. 需要场景图时配合 `txt-to-image` 生成宣传图
+
+---
+
+## 7. 项目约定与安全
+
+### 7.1 进 Git / 不进 Git
+
+| 内容 | 位置 | 进 Git |
+|------|------|--------|
+| Skills 源码 | kit 仓库 → `~/.cursor/skills/` | kit ✅ |
+| AGENT.md | 项目根 | 项目 ✅ |
+| project.json | `.jeemoo/` | 项目 ✅ |
+| 飞书 / API / SSH 密钥 | `~/.jeemoo/secrets.env`、`keys/` | ❌ |
+
+### 7.2 飞书凭证
+
+```bash
+# 从 kit 复制模板
+cp /path/to/jeemookit/templates/secrets.env.example ~/.jeemoo/secrets.env
+# 编辑填写 FEISHU_APP_ID / FEISHU_APP_SECRET 等
 ```
 
-```mermaid
-flowchart TB
-    A[运行 install 脚本] --> B[读取 manifest.json]
-    B --> C[安装 Skills 至 ~/.cursor/skills/]
-    B --> D[复制 AGENT.md 与 .jeemoo/]
-    C --> E[pip / npm 依赖安装]
-    D --> F[项目就绪]
-    E --> F
-```
+密钥**永不**提交到任何仓库。
 
-| 参数 | 说明 |
+### 7.3 部署权限
+
+`.jeemoo/project.json` 中 `permissions` 默认：
+
+- `agentCanDeploy: false`
+- `requireConfirmBeforeDeploy: true`
+
+Agent 不会在未确认时自动部署。
+
+---
+
+## 8. 故障排查
+
+| 现象 | 处理 |
 |------|------|
-| `--project-root` / `-ProjectRoot` | 目标项目路径 |
-| `--skills-only` / `-SkillsOnly` | 仅安装全局 Skills |
-| `--agent-only` / `-AgentOnly` | 仅复制 AGENT.md 与项目配置 |
-| `--skip-deps` / `-SkipDeps` | 跳过 pip / npm |
-| `--force-agent` / `-ForceAgent` | 覆盖已有 AGENT.md |
+| Agent 找不到 Skill | 确认 `~/.cursor/skills/<id>/SKILL.md` 存在；新开 Agent 对话 |
+| pip / npm 失败 | 检查 Python / Node 是否在 PATH；去掉 `-SkipDeps` 重装 |
+| Mermaid / SVG 导出空白 | 确认 Node.js 可用；检查 MD 语法与图片相对路径 |
+| 飞书 login 失败 | 检查 `secrets.env` 与开放平台回调地址 |
+| 飞书上传无图 | 勿加 `--no-sync`；确认 `md-to-word` 已安装 |
+| Word 转 MD 失败 | 确认是 `.docx` 而非 `.doc` |
+| 落地页观感「AI 味」 | 明确要求加载 `design-taste-frontend` 并完成 Pre-Flight |
 
-### 5.3 初始化后结构
+手动补装依赖示例：
 
-```
-~/.cursor/skills/          # 全局 Skills
-├── pdf-to-md/
-├── md-to-word/
-├── txt-to-image/
-└── md-to-feishu/
-
-my-app/                    # 目标项目
-├── AGENT.md
-├── .jeemoo/project.json
-├── doc/
-├── src/
-└── scripts/
+```bash
+pip install -r ~/.cursor/skills/pdf-to-md/scripts/requirements.txt
+pip install -r ~/.cursor/skills/md-to-feishu/scripts/requirements.txt
+cd ~/.cursor/skills/md-to-word && npm install
 ```
 
 ---
 
-## 6. 产品组成与扩展
+## 9. 快速参考卡
 
-### 6.1 组件清单
-
-| 组件 | 说明 |
-|------|------|
-| `install.sh` / `install.ps1` | 一键安装脚本 |
-| `manifest.json` | Skills 与模板的单一事实来源 |
-| `templates/` | AGENT.md、project.json、secrets.env.example |
-| `skills/` | pdf-to-md、md-to-word、txt-to-image、md-to-feishu |
-
-### 6.2 扩展 kit
-
-1. 在 `skills/<name>/` 新增 Skill（含 `SKILL.md`）
-2. 在 `manifest.json` 注册 id、version、path、依赖
-3. 更新 `templates/AGENT.md` 与 `secrets.env.example`
-
----
-
-## 7. 安全说明
-
-- 密钥（SSH、API Key、飞书 Secret）仅存 `~/.jeemoo/`，**永不进 Git**
-- `project.json` 限制 Agent 自动部署范围
-- 飞书默认浏览器 OAuth，无需在仓库配置机器人凭证
-
----
-
-## 8. 快速参考
-
-| 需求 | 操作 |
-|------|------|
-| 新项目初始化 | `install.sh` / `install.ps1` |
-| PDF 转 Markdown | 「PDF 转 MD」或 `pdf2md.py` |
-| 文档配图 | `@skills/txt-to-image` 或说明图类型 |
-| 导出 Word | 「导出 Word」或 `md2docx.py` |
-| 上传飞书 | 「上传到飞书」或 `md2feishu.py` |
-| 配置飞书 | `secrets.env.example` → `~/.jeemoo/secrets.env` |
-| 扩展 Skill | 编辑 `manifest.json` + 新增 `skills/<name>/` |
+| 需求 | 命令或说法 |
+|------|------------|
+| 初始化项目 | `install.ps1 -ProjectRoot …` / `install.sh --project-root …` |
+| 只更新 Skills | `install.ps1 -SkillsOnly` |
+| PDF → MD | 「PDF 转 MD」或 `pdf2md.py` |
+| Word → MD | 「Word 转 MD」或 `docx2md.py` |
+| 配图 | 「结构图 / 专利图 / 宣传图」+ `txt-to-image` |
+| MD → Word | 「导出 Word」或 `md2docx.py` |
+| MD → 飞书 | 「上传到飞书」或 `md2feishu.py` |
+| 飞书 → MD | 「飞书转 md」或 `feishu2md.py` |
+| 落地页设计 | 「用 design-taste-frontend」 |
+| 扩展 Skill | `skills/<name>/` + 注册 `manifest.json` |
 
 ### 版本历史
 
 | 版本 | 主要变化 |
 |------|----------|
-| 1.3.0 | 新增 `pdf-to-md` Skill（PDF → Markdown，含 OCR） |
-| 1.2.0 | 新增 `md-to-feishu`；配图 Skill 更名为 `txt-to-image`；专利图统一 `assets/` |
-| 1.0.0 | 初始版本：`md-to-word`、配图规范、AGENT 与 project 模板 |
+| 1.4.0 | 新增 `word-to-md`、`design-taste-frontend`；文档补齐 `feishu-to-md` |
+| 1.3.0 | 新增 `pdf-to-md`（含 OCR） |
+| 1.2.0 | 新增 `md-to-feishu`；配图 Skill 更名为 `txt-to-image` |
+| 1.0.0 | 初始：`md-to-word`、配图规范、AGENT 与 project 模板 |
 
 ---
 
-*本文档描述 jeemookit v1.3.0。命令细节与故障排查见 [README.md](../README.md) 及各 Skill 的 `SKILL.md`。*
+*本文档对应 jeemookit v1.4.0。安装脚本细节见仓库 [README.md](../README.md)；各 Skill 命令与限制以 `~/.cursor/skills/<id>/SKILL.md` 为准。*
+
+面向非技术同学的推广向说明见：[jeemookit 用户手册](jeemookit用户手册.md)。
