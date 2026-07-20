@@ -72,3 +72,7 @@ SSH KEY: JeemooApps.pem
 FRONTEND_DIR=frontend BACKEND_DIR=backend FRONTEND_URL=http://localhost:5173 bash scripts/start.sh
 ```
 
+## 5. 前端落地页 / 营销页
+
+做落地页、作品集、营销站或 UI 改版时，优先加载全局 Skill **`design-taste-frontend`**（taste-skill v2）：先 Brief 推断与三档 Dial，再实现，交付前跑 Pre-Flight。
+

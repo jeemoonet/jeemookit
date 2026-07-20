@@ -1,6 +1,6 @@
 {
   "name": "jeemookit",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Jeemoo 新项目模板：全局 Skills、项目 AGENT.md 与部署元数据",
   "skills": [
     {
@@ -16,6 +16,15 @@
       "id": "pdf-to-md",
       "version": "1.0.0",
       "path": "skills/pdf-to-md",
+      "install": {
+        "npm": false,
+        "pip": "scripts/requirements.txt"
+      }
+    },
+    {
+      "id": "word-to-md",
+      "version": "1.0.0",
+      "path": "skills/word-to-md",
       "install": {
         "npm": false,
         "pip": "scripts/requirements.txt"
@@ -46,6 +55,15 @@
       "install": {
         "npm": false,
         "pip": "scripts/requirements.txt"
+      }
+    },
+    {
+      "id": "design-taste-frontend",
+      "version": "2.0.0",
+      "path": "skills/design-taste-frontend",
+      "install": {
+        "npm": false,
+        "pip": false
       }
     }
   ],
