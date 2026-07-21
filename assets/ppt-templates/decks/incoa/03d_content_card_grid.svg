@@ -1,0 +1,49 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="1280" height="720" fill="#F4F5F7"/>
+  <text x="64" y="98" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="36" font-weight="bold" fill="#1F2A3C">?????<tspan fill="#C4382A">{{PAGE_TITLE}}</tspan></text>
+  <text x="64" y="134" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="16" font-style="italic" fill="#8A94A3">{{KEY_MESSAGE}}</text>
+
+  <rect x="64" y="176" width="270" height="200" rx="12" fill="#FFFFFF" stroke="#E4E7EC" stroke-width="1"/>
+  <text x="84" y="238" font-family="Arial,sans-serif" font-size="44" font-weight="bold" fill="#EAECEF">01</text>
+  <text x="84" y="292" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="19" font-weight="bold" fill="#1F2A3C">{{CARD_1_TITLE}}</text>
+  <text x="84" y="322" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="13" fill="#8A94A3">??????</text>
+
+  <rect x="358" y="176" width="270" height="200" rx="12" fill="#FFFFFF" stroke="#E4E7EC" stroke-width="1"/>
+  <text x="378" y="238" font-family="Arial,sans-serif" font-size="44" font-weight="bold" fill="#EAECEF">02</text>
+  <text x="378" y="292" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="19" font-weight="bold" fill="#1F2A3C">{{CARD_2_TITLE}}</text>
+  <text x="378" y="322" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="13" fill="#8A94A3">??????</text>
+
+  <rect x="652" y="176" width="270" height="200" rx="12" fill="#FFFFFF" stroke="#E4E7EC" stroke-width="1"/>
+  <text x="672" y="238" font-family="Arial,sans-serif" font-size="44" font-weight="bold" fill="#EAECEF">03</text>
+  <text x="672" y="292" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="19" font-weight="bold" fill="#1F2A3C">{{CARD_3_TITLE}}</text>
+  <text x="672" y="322" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="13" fill="#8A94A3">??????</text>
+
+  <rect x="946" y="176" width="270" height="200" rx="12" fill="#FFFFFF" stroke="#E4E7EC" stroke-width="1"/>
+  <text x="966" y="238" font-family="Arial,sans-serif" font-size="44" font-weight="bold" fill="#EAECEF">04</text>
+  <text x="966" y="292" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="19" font-weight="bold" fill="#1F2A3C">{{CARD_4_TITLE}}</text>
+  <text x="966" y="322" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="13" fill="#8A94A3">??????</text>
+
+  <rect x="64" y="400" width="270" height="200" rx="12" fill="#FFFFFF" stroke="#E4E7EC" stroke-width="1"/>
+  <text x="84" y="462" font-family="Arial,sans-serif" font-size="44" font-weight="bold" fill="#EAECEF">05</text>
+  <text x="84" y="516" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="19" font-weight="bold" fill="#1F2A3C">{{CARD_5_TITLE}}</text>
+  <text x="84" y="546" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="13" fill="#8A94A3">??????</text>
+
+  <rect x="358" y="400" width="270" height="200" rx="12" fill="#FFFFFF" stroke="#E4E7EC" stroke-width="1"/>
+  <text x="378" y="462" font-family="Arial,sans-serif" font-size="44" font-weight="bold" fill="#EAECEF">06</text>
+  <text x="378" y="516" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="19" font-weight="bold" fill="#1F2A3C">{{CARD_6_TITLE}}</text>
+  <text x="378" y="546" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="13" fill="#8A94A3">??????</text>
+
+  <rect x="652" y="400" width="270" height="200" rx="12" fill="#FFFFFF" stroke="#E4E7EC" stroke-width="1"/>
+  <text x="672" y="462" font-family="Arial,sans-serif" font-size="44" font-weight="bold" fill="#EAECEF">07</text>
+  <text x="672" y="516" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="19" font-weight="bold" fill="#1F2A3C">{{CARD_7_TITLE}}</text>
+  <text x="672" y="546" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="13" fill="#8A94A3">??????</text>
+
+  <rect x="946" y="400" width="270" height="200" rx="12" fill="#152238"/>
+  <text x="966" y="462" font-family="Arial,sans-serif" font-size="44" font-weight="bold" fill="#1E2D48">08</text>
+  <text x="966" y="516" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="19" font-weight="bold" fill="#FFFFFF">{{CARD_8_TITLE}}</text>
+  <text x="966" y="546" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="13" fill="#9AA6BC">??????</text>
+
+  <line x1="64" y1="676" x2="1216" y2="676" stroke="#E4E7EC" stroke-width="1"/>
+  <text x="64" y="701" font-family="Arial,sans-serif" font-size="12" fill="#9AA3B0">???(JEEMOO.COM)</text>
+  <text x="1216" y="701" font-family="Arial,sans-serif" font-size="12" fill="#9AA3B0" text-anchor="end">{{PAGE_NUM}}</text>
+</svg>

@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
-# jeemookit: global Skills + AGENT.md + 项目配置
+# jeemookit: global Skills + AGENT.md + project scripts
 set -euo pipefail
 
 KIT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(pwd)"
 USER_SKILLS="${HOME}/.cursor/skills"
 FORCE_AGENT=false
-FORCE_PROJECT=false
 SKIP_DEPS=false
 SKILLS_ONLY=false
 AGENT_ONLY=false
+SKIP_PPT_MASTER=false
 
 usage() {
   cat <<'EOF'
@@ -18,10 +18,10 @@ Usage: install.sh [options]
 Options:
   --project-root PATH   Target project directory (default: current directory)
   --force-agent         Overwrite existing AGENT.md
-  --force-project       Overwrite .jeemoo/project.json
   --skip-deps           Skip pip/npm install
   --skills-only         Install skills only
-  --agent-only          Install AGENT.md and project config only
+  --agent-only          Install AGENT.md and project scripts only
+  --skip-ppt-master     Skip deploying the incoa PPT Master deck template
   -h, --help            Show help
 EOF
 }
@@ -30,10 +30,10 @@ while [[ $# -gt 0 ]]; do
   case "$1" in
     --project-root) PROJECT_ROOT="$2"; shift 2 ;;
     --force-agent) FORCE_AGENT=true; shift ;;
-    --force-project) FORCE_PROJECT=true; shift ;;
     --skip-deps) SKIP_DEPS=true; shift ;;
     --skills-only) SKILLS_ONLY=true; shift ;;
     --agent-only) AGENT_ONLY=true; shift ;;
+    --skip-ppt-master) SKIP_PPT_MASTER=true; shift ;;
     -h|--help) usage; exit 0 ;;
     *) echo "Unknown option: $1"; usage; exit 1 ;;
   esac
@@ -106,6 +106,67 @@ for skill in manifest["skills"]:
 PY
 }
 
+deploy_ppt_templates() {
+  step "Deploying PPT Master deck templates"
+
+  python3 - <<'PY' "$KIT_ROOT" "$HOME"
+import json, shutil, subprocess, sys
+from pathlib import Path
+
+kit, home = Path(sys.argv[1]), Path(sys.argv[2])
+manifest = json.loads((kit / "manifest.json").read_text(encoding="utf-8"))
+cfg = manifest.get("pptMaster")
+if not cfg:
+    sys.exit(0)
+
+def find_root():
+    for rel in cfg.get("installCandidates", []):
+        base = home / rel
+        if (base / "scripts" / "register_template.py").is_file() and (base / "templates").is_dir():
+            return base
+    return None
+
+root = find_root()
+if root is None:
+    repo = cfg.get("repo", "https://github.com/hugohe3/ppt-master")
+    print("\n  未检测到 PPT Master skill，已跳过 incoa 模板部署。")
+    print("  请先从 GitHub 页面下载安装 PPT Master，然后重新运行本安装脚本：")
+    print(f"    页面: {repo}")
+    print("    方式A (skill 包, 需 Node/npx):  npx -y skills add hugohe3/ppt-master")
+    print("    方式B (完整仓库, 需 git):        git clone https://github.com/hugohe3/ppt-master.git")
+    print("  安装完成后再次执行: ./install.sh  (会自动部署并注册 incoa 模板)\n")
+    sys.exit(0)
+
+print(f"  ppt-master: {root}")
+decks_dir = root / "templates" / "decks"
+decks_dir.mkdir(parents=True, exist_ok=True)
+
+for deck in cfg.get("decks", []):
+    src = kit / deck["path"]
+    dest = decks_dir / deck["id"]
+    if not src.is_dir():
+        print(f"  skip missing deck source: {deck['id']} ({src})")
+        continue
+    print(f"  - deck: {deck['id']}")
+    dest.mkdir(parents=True, exist_ok=True)
+    for item in src.iterdir():
+        target = dest / item.name
+        if item.is_dir():
+            if target.exists():
+                shutil.rmtree(target)
+            shutil.copytree(item, target)
+        else:
+            shutil.copy2(item, target)
+    try:
+        subprocess.check_call(
+            [sys.executable, "scripts/register_template.py", deck["id"], "--kind", "deck"],
+            cwd=str(root),
+        )
+    except Exception as e:
+        print(f"  register_template failed for {deck['id']}: {e}")
+PY
+}
+
 install_agent() {
   local template="$KIT_ROOT/templates/AGENT.md"
   local target="$PROJECT_ROOT/AGENT.md"
@@ -130,28 +191,6 @@ install_agent() {
 
   cp "$template" "$target"
   echo "  wrote AGENT.md"
-}
-
-install_project_jeemoo() {
-  local template_dir="$KIT_ROOT/templates/.jeemoo"
-  local target_dir="$PROJECT_ROOT/.jeemoo"
-  local target_config="$target_dir/project.json"
-
-  [[ -d "$template_dir" ]] || return
-
-  step "Installing project config to $target_dir"
-  mkdir -p "$target_dir"
-
-  if [[ -f "$target_config" && "$FORCE_PROJECT" != true ]]; then
-    echo "  .jeemoo/project.json exists, skipped (use --force-project)"
-  else
-    local name
-    name="$(basename "$PROJECT_ROOT")"
-    sed "s/YOUR_PROJECT_NAME/$name/g" "$template_dir/project.json" > "$target_config"
-    echo "  .jeemoo/project.json written"
-  fi
-
-  cp "$template_dir/.gitignore" "$target_dir/.gitignore"
 }
 
 install_project_scripts() {
@@ -182,14 +221,15 @@ install_project_scripts() {
 
 if [[ "$AGENT_ONLY" != true ]]; then
   install_skills
+  if [[ "$SKIP_PPT_MASTER" == true ]]; then
+    echo "  skipped PPT Master template deploy (--skip-ppt-master)"
+  else
+    deploy_ppt_templates
+  fi
 fi
 
 if [[ "$SKILLS_ONLY" != true ]]; then
   install_agent
-fi
-
-if [[ "$SKILLS_ONLY" != true ]]; then
-  install_project_jeemoo
   install_project_scripts
 fi
 
@@ -198,10 +238,9 @@ echo "Done."
 echo "  Global skills:  $USER_SKILLS"
 if [[ "$SKILLS_ONLY" != true ]]; then
   echo "  Project AGENT.md: $PROJECT_ROOT/AGENT.md"
-  echo "  Project config:   $PROJECT_ROOT/.jeemoo/project.json"
   echo "  Project scripts:  $PROJECT_ROOT/scripts"
 fi
 echo
 echo "Next steps:"
-echo "  1. 编辑 AGENT.md 与 .jeemoo/project.json"
+echo "  1. 编辑 AGENT.md"
 echo "  2. Restart or open a new Cursor Agent chat"

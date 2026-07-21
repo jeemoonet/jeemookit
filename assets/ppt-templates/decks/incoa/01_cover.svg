@@ -1,0 +1,45 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="coverImgFade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1A1D24" stop-opacity="0"/>
+      <stop offset="1" stop-color="#1A1D24" stop-opacity="0.55"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Right cover image -->
+  <rect x="0" y="0" width="1280" height="720" fill="#2A2E36"/>
+  <image href="cover_illustration.png" x="560" y="0" width="720" height="720" preserveAspectRatio="xMidYMid slice"/>
+  <rect x="560" y="0" width="720" height="720" fill="url(#coverImgFade)"/>
+
+  <!-- Left charcoal brand panel -->
+  <rect x="0" y="0" width="576" height="720" fill="#1A1D24"/>
+
+  <!-- Gold logo pill -->
+  <rect x="64" y="66" width="156" height="30" rx="15" fill="#C79A3E"/>
+  <text x="142" y="86" font-family="Arial,sans-serif" font-size="14" font-weight="bold" letter-spacing="1.5" fill="#1A1D24" text-anchor="middle">{{BRAND_LOGO}}</text>
+
+  <!-- Title -->
+  <text x="64" y="248" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="46" font-weight="bold" fill="#FFFFFF">{{TITLE}}</text>
+  <text x="64" y="308" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="42" font-weight="bold" fill="#FFFFFF">&#20225;&#19994;&#65;&#73;&#24212;&#29992;&#26381;&#21153;&#26041;&#26696;</text>
+
+  <!-- Gold subtitle -->
+  <text x="66" y="372" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="21" font-weight="bold" fill="#C79A3E">{{SUBTITLE}}</text>
+  <!-- Tagline -->
+  <text x="66" y="406" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" fill="#9AA0AC">{{TAGLINE}}</text>
+
+  <!-- Divider -->
+  <rect x="66" y="470" width="120" height="2" fill="#C79A3E"/>
+
+  <!-- Author & date -->
+  <text x="66" y="512" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" fill="#C9CDD6">{{AUTHOR}}</text>
+  <text x="66" y="540" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" fill="#8A90A0">{{DATE}}</text>
+
+  <!-- FDE ghost watermark -->
+  <text x="40" y="710" font-family="Arial,sans-serif" font-size="150" font-weight="bold" letter-spacing="4" fill="#23262E">FDE</text>
+
+  <!-- Statement card over image -->
+  <rect x="632" y="556" width="592" height="120" rx="10" fill="#FFFFFF" fill-opacity="0.92"/>
+  <rect x="632" y="556" width="6" height="120" rx="3" fill="#C79A3E"/>
+  <text x="662" y="600" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="16" fill="#1F2A3C">{{STATEMENT}}</text>
+  <text x="662" y="630" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="14" fill="#5A6472">&#26041;&#27861;&#35770;&#20026;&#22320;&#22522;&#65292;&#29992;&#65;&#73;&#25226;&#32463;&#39564;&#27785;&#28096;&#20026;&#21487;&#22797;&#21046;&#30340;&#32452;&#32455;&#33021;&#21147;</text>
+</svg>

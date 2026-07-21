@@ -1,0 +1,48 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="1280" height="720" fill="#F4F5F7"/>
+  <rect x="64" y="52" width="120" height="26" rx="13" fill="#C79A3E"/>
+  <text x="124" y="70" font-family="Arial,sans-serif" font-size="13" font-weight="bold" letter-spacing="1.5" fill="#1A1D24" text-anchor="middle">{{TAG}}</text>
+  <text x="64" y="122" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="34" font-weight="bold" fill="#1F2A3C">{{PAGE_TITLE}}</text>
+  <rect x="64" y="140" width="4" height="20" fill="#2E6DA4"/>
+  <text x="78" y="156" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" fill="#5A6472">{{KEY_MESSAGE}}</text>
+
+  <text x="42" y="304" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" fill="#8A94A3">?<tspan x="42" dy="24">?</tspan><tspan x="42" dy="24">?</tspan><tspan x="42" dy="24">?</tspan></text>
+
+  <rect x="72" y="196" width="348" height="198" rx="8" fill="#EFF1F4"/>
+  <text x="246" y="278" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="20" font-weight="bold" fill="#3C4757" text-anchor="middle">??? ? ???</text>
+  <text x="246" y="310" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="14" fill="#8A94A3" text-anchor="middle">?????????</text>
+
+  <rect x="428" y="196" width="348" height="198" rx="8" fill="#C79A3E"/>
+  <polygon points="602,262 610,286 636,286 615,301 623,326 602,311 581,326 589,301 568,286 594,286" fill="#FFFFFF"/>
+  <text x="602" y="352" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="20" font-weight="bold" fill="#FFFFFF" text-anchor="middle">??? ? ???</text>
+
+  <rect x="72" y="402" width="348" height="198" rx="8" fill="#F7F8FA"/>
+  <text x="246" y="484" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="20" font-weight="bold" fill="#9AA3B0" text-anchor="middle">??? ? ???</text>
+  <text x="246" y="516" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="14" fill="#B4BCC7" text-anchor="middle">????</text>
+
+  <rect x="428" y="402" width="348" height="198" rx="8" fill="#FFFFFF" stroke="#E4E7EC" stroke-width="1"/>
+  <text x="602" y="484" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="20" font-weight="bold" fill="#3C4757" text-anchor="middle">??? ? ???</text>
+  <text x="602" y="516" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="14" fill="#8A94A3" text-anchor="middle">??????????</text>
+
+  <text x="424" y="628" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" fill="#8A94A3" text-anchor="middle">??? &#8594;</text>
+
+  <rect x="808" y="196" width="408" height="190" rx="10" fill="#FFFFFF" stroke="#E4E7EC" stroke-width="1"/>
+  <rect x="808" y="196" width="408" height="44" rx="10" fill="#2E6DA4"/>
+  <rect x="808" y="222" width="408" height="18" fill="#2E6DA4"/>
+  <text x="832" y="224" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="18" font-weight="bold" fill="#FFFFFF">??????</text>
+  <text x="832" y="286" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" fill="#3C4757">?????????????</text>
+  <text x="832" y="320" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" fill="#3C4757">??????? / ?? / ???</text>
+  <text x="832" y="354" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" fill="#3C4757">???????????????</text>
+
+  <rect x="808" y="410" width="408" height="190" rx="10" fill="#FFFFFF" stroke="#E4E7EC" stroke-width="1"/>
+  <rect x="808" y="410" width="408" height="44" rx="10" fill="#152238"/>
+  <rect x="808" y="436" width="408" height="18" fill="#152238"/>
+  <text x="832" y="438" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="18" font-weight="bold" fill="#FFFFFF">???????</text>
+  <text x="832" y="500" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" fill="#3C4757">??? Owner????????</text>
+  <text x="832" y="534" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" fill="#3C4757">8 ?????????????</text>
+  <text x="832" y="568" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" font-weight="bold" fill="#C79A3E">?????1 ????? + 1 ???</text>
+
+  <line x1="64" y1="672" x2="1216" y2="672" stroke="#E4E7EC" stroke-width="1"/>
+  <text x="64" y="697" font-family="Arial,sans-serif" font-size="12" fill="#9AA3B0">???(JEEMOO.COM)</text>
+  <text x="1216" y="697" font-family="Arial,sans-serif" font-size="12" fill="#9AA3B0" text-anchor="end">{{PAGE_NUM}}</text>
+</svg>

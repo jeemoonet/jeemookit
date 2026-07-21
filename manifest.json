@@ -1,7 +1,7 @@
 {
   "name": "jeemookit",
   "version": "1.4.0",
-  "description": "Jeemoo 新项目模板：全局 Skills、项目 AGENT.md 与部署元数据",
+  "description": "Jeemoo 新项目模板：全局 Skills、项目 AGENT.md 与启动脚本",
   "skills": [
     {
       "id": "md-to-word",
@@ -56,19 +56,24 @@
         "npm": false,
         "pip": "scripts/requirements.txt"
       }
-    },
-    {
-      "id": "design-taste-frontend",
-      "version": "2.0.0",
-      "path": "skills/design-taste-frontend",
-      "install": {
-        "npm": false,
-        "pip": false
-      }
     }
   ],
   "templates": {
-    "agent": "templates/AGENT.md",
-    "project": "templates/.jeemoo/project.json"
+    "agent": "templates/AGENT.md"
+  },
+  "pptMaster": {
+    "repo": "https://github.com/hugohe3/ppt-master",
+    "skillId": "ppt-master",
+    "installCandidates": [
+      ".agents/skills/ppt-master",
+      ".cursor/skills/ppt-master",
+      ".claude/skills/ppt-master"
+    ],
+    "decks": [
+      {
+        "id": "incoa",
+        "path": "assets/ppt-templates/decks/incoa"
+      }
+    ]
   }
 }

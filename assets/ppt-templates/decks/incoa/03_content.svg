@@ -1,0 +1,24 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect x="0" y="0" width="1280" height="720" fill="#F4F5F7"/>
+
+  <!-- Eyebrow -->
+  <text x="64" y="66" font-family="Arial,sans-serif" font-size="14" font-weight="bold" letter-spacing="3" fill="#8A94A3">{{EYEBROW}}</text>
+  <!-- Title -->
+  <text x="64" y="112" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="34" font-weight="bold" fill="#1F2A3C">{{PAGE_TITLE}}</text>
+  <!-- Key insight subtitle -->
+  <rect x="64" y="130" width="4" height="20" fill="#2E6DA4"/>
+  <text x="78" y="146" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" fill="#5A6472">{{KEY_MESSAGE}}</text>
+
+  <!-- Content area -->
+  <rect x="64" y="178" width="1152" height="470" rx="12" fill="#FFFFFF" stroke="#E4E7EC" stroke-width="1"/>
+  <text x="640" y="418" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="16" fill="#C0C7D1" text-anchor="middle">{{CONTENT_AREA}}</text>
+
+  <!-- Ghost watermark -->
+  <text x="1216" y="640" font-family="Arial,sans-serif" font-size="150" font-weight="bold" fill="#EAECEF" text-anchor="end">{{PAGE_NUM}}</text>
+
+  <!-- Footer -->
+  <line x1="64" y1="676" x2="1216" y2="676" stroke="#E4E7EC" stroke-width="1"/>
+  <text x="64" y="701" font-family="Arial,sans-serif" font-size="12" fill="#9AA3B0">积木网(JEEMOO.COM)</text>
+  <text x="1216" y="701" font-family="Arial,sans-serif" font-size="12" fill="#9AA3B0" text-anchor="end">{{PAGE_NUM}}</text>
+</svg>

@@ -1,0 +1,46 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="1280" height="720" fill="#F4F5F7"/>
+  <text x="64" y="72" font-family="Arial,sans-serif" font-size="14" font-weight="bold" letter-spacing="3" fill="#8A94A3">{{EYEBROW}}</text>
+  <text x="64" y="120" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="34" font-weight="bold" fill="#1F2A3C">{{PAGE_TITLE}}</text>
+  <rect x="66" y="136" width="120" height="4" fill="#C79A3E"/>
+  <text x="446" y="410" font-family="Arial,sans-serif" font-size="34" font-weight="bold" fill="#C79A3E" text-anchor="middle">&#8250;</text>
+  <text x="842" y="410" font-family="Arial,sans-serif" font-size="34" font-weight="bold" fill="#C79A3E" text-anchor="middle">&#8250;</text>
+  <rect x="64" y="188" width="356" height="440" rx="12" fill="#FFFFFF" stroke="#E4E7EC" stroke-width="1"/>
+  <circle cx="118" cy="248" r="30" fill="#F1ECDF"/>
+  <circle cx="118" cy="248" r="15" fill="none" stroke="#152238" stroke-width="3"/>
+  <circle cx="118" cy="248" r="4" fill="#152238"/>
+  <text x="96" y="320" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" font-weight="bold" letter-spacing="2" fill="#8A94A3">&#38454;&#27573;&#19968;</text>
+  <text x="96" y="356" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="26" font-weight="bold" fill="#1F2A3C">{{COL_1_TITLE}}</text>
+  <text x="96" y="386" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" font-style="italic" fill="#8A94A3">sub-headline</text>
+  <line x1="96" y1="408" x2="388" y2="408" stroke="#E4E7EC" stroke-width="1"/>
+  <circle cx="102" cy="446" r="3" fill="#C79A3E"/><text x="118" y="451" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" fill="#3C4757">&#35201;&#28857;&#19968;</text>
+  <circle cx="102" cy="486" r="3" fill="#C79A3E"/><text x="118" y="491" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" fill="#3C4757">&#35201;&#28857;&#20108;</text>
+  <circle cx="102" cy="526" r="3" fill="#C79A3E"/><text x="118" y="531" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" fill="#3C4757">&#35201;&#28857;&#19977;</text>
+  <rect x="460" y="188" width="356" height="440" rx="12" fill="#152238"/>
+  <circle cx="514" cy="248" r="30" fill="#F1ECDF"/>
+  <circle cx="507" cy="243" r="5" fill="#152238"/><circle cx="523" cy="240" r="5" fill="#152238"/><circle cx="515" cy="256" r="5" fill="#152238"/>
+  <line x1="507" y1="243" x2="515" y2="256" stroke="#152238" stroke-width="2"/><line x1="523" y1="240" x2="515" y2="256" stroke="#152238" stroke-width="2"/>
+  <text x="492" y="320" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" font-weight="bold" letter-spacing="2" fill="#C79A3E">&#38454;&#27573;&#20108;</text>
+  <text x="492" y="356" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="26" font-weight="bold" fill="#FFFFFF">{{COL_2_TITLE}}</text>
+  <text x="492" y="386" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" font-style="italic" fill="#9AA6BC">sub-headline</text>
+  <line x1="492" y1="408" x2="784" y2="408" stroke="#2C3B58" stroke-width="1"/>
+  <circle cx="498" cy="446" r="3" fill="#C79A3E"/><text x="514" y="451" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" fill="#D6DCE6">&#35201;&#28857;&#19968;</text>
+  <circle cx="498" cy="486" r="3" fill="#C79A3E"/><text x="514" y="491" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" fill="#D6DCE6">&#35201;&#28857;&#20108;</text>
+  <circle cx="498" cy="526" r="3" fill="#C79A3E"/><text x="514" y="531" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" fill="#D6DCE6">&#35201;&#28857;&#19977;</text>
+  <rect x="492" y="566" width="292" height="34" rx="6" fill="#C79A3E"/>
+  <text x="638" y="589" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" font-weight="bold" fill="#152238" text-anchor="middle">&#26412;&#26041;&#26696;&#37325;&#28857;&#33853;&#22320;&#38454;&#27573;</text>
+  <rect x="856" y="188" width="356" height="440" rx="12" fill="#FFFFFF" stroke="#E4E7EC" stroke-width="1"/>
+  <circle cx="910" cy="248" r="30" fill="#F1ECDF"/>
+  <path d="M898 258 q6 -14 12 -6 q6 8 12 -6" fill="none" stroke="#152238" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="898" cy="258" r="3" fill="#152238"/><circle cx="922" cy="246" r="3" fill="#152238"/>
+  <text x="888" y="320" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" font-weight="bold" letter-spacing="2" fill="#8A94A3">&#38454;&#27573;&#19977;</text>
+  <text x="888" y="356" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="26" font-weight="bold" fill="#1F2A3C">{{COL_3_TITLE}}</text>
+  <text x="888" y="386" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" font-style="italic" fill="#8A94A3">sub-headline</text>
+  <line x1="888" y1="408" x2="1180" y2="408" stroke="#E4E7EC" stroke-width="1"/>
+  <circle cx="894" cy="446" r="3" fill="#C79A3E"/><text x="910" y="451" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" fill="#3C4757">&#35201;&#28857;&#19968;</text>
+  <circle cx="894" cy="486" r="3" fill="#C79A3E"/><text x="910" y="491" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" fill="#3C4757">&#35201;&#28857;&#20108;</text>
+  <circle cx="894" cy="526" r="3" fill="#C79A3E"/><text x="910" y="531" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" fill="#3C4757">&#35201;&#28857;&#19977;</text>
+  <line x1="64" y1="676" x2="1216" y2="676" stroke="#E4E7EC" stroke-width="1"/>
+  <text x="64" y="701" font-family="Arial,sans-serif" font-size="12" fill="#9AA3B0">&#31215;&#26408;&#32593;(JEEMOO.COM)</text>
+  <text x="1216" y="701" font-family="Arial,sans-serif" font-size="12" fill="#9AA3B0" text-anchor="end">{{PAGE_NUM}}</text>
+</svg>

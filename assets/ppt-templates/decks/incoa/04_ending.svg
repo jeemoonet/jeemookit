@@ -1,0 +1,26 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <!-- Navy background -->
+  <rect x="0" y="0" width="1280" height="720" fill="#152238"/>
+
+  <!-- FDE ghost watermark -->
+  <text x="1240" y="700" font-family="Arial,sans-serif" font-size="240" font-weight="bold" letter-spacing="6" fill="#1E2D48" text-anchor="end">FDE</text>
+
+  <!-- Gold logo pill -->
+  <rect x="562" y="196" width="156" height="30" rx="15" fill="#C79A3E"/>
+  <text x="640" y="216" font-family="Arial,sans-serif" font-size="14" font-weight="bold" letter-spacing="1.5" fill="#1A1D24" text-anchor="middle">{{BRAND_LOGO}}</text>
+
+  <!-- Thank you -->
+  <text x="640" y="352" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="66" font-weight="bold" fill="#FFFFFF" text-anchor="middle">{{THANK_YOU}}</text>
+
+  <!-- Gold divider -->
+  <rect x="580" y="384" width="120" height="3" fill="#C79A3E"/>
+
+  <!-- Subtitle -->
+  <text x="640" y="440" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="20" fill="#9AA6BC" text-anchor="middle">{{ENDING_SUBTITLE}}</text>
+
+  <!-- Contact -->
+  <text x="640" y="510" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="16" fill="#C9CDD6" text-anchor="middle">{{CONTACT_INFO}}</text>
+
+  <!-- Footer -->
+  <text x="640" y="672" font-family="Arial,sans-serif" font-size="13" letter-spacing="1" fill="#5C6885" text-anchor="middle">积木网(JEEMOO.COM)</text>
+</svg>

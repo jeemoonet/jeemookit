@@ -1,0 +1,42 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect x="0" y="0" width="1280" height="720" fill="#F4F5F7"/>
+
+  <!-- Left title block -->
+  <text x="64" y="180" font-family="Arial,sans-serif" font-size="15" font-weight="bold" letter-spacing="4" fill="#8A94A3">{{EYEBROW}}</text>
+  <text x="64" y="240" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="48" font-weight="bold" fill="#1F2A3C">{{PAGE_TITLE}}</text>
+  <rect x="66" y="262" width="120" height="4" fill="#C79A3E"/>
+  <rect x="64" y="360" width="360" height="200" fill="#152238" rx="12"/>
+  <text x="244" y="450" font-family="Arial,sans-serif" font-size="120" font-weight="bold" fill="#1E2D48" text-anchor="middle">01</text>
+  <text x="244" y="530" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="16" fill="#9AA6BC" text-anchor="middle">议程 · AGENDA</text>
+
+  <!-- Right TOC list -->
+  <g>
+    <text x="560" y="185" font-family="Arial,sans-serif" font-size="30" font-weight="bold" fill="#C79A3E">01</text>
+    <text x="620" y="180" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="24" font-weight="bold" fill="#1F2A3C">{{TOC_ITEM_1_TITLE}}</text>
+    <text x="620" y="208" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" fill="#8A94A3">{{TOC_ITEM_1_DESC}}</text>
+    <line x1="560" y1="232" x2="1216" y2="232" stroke="#E4E7EC" stroke-width="1"/>
+  </g>
+  <g>
+    <text x="560" y="305" font-family="Arial,sans-serif" font-size="30" font-weight="bold" fill="#C79A3E">02</text>
+    <text x="620" y="300" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="24" font-weight="bold" fill="#1F2A3C">{{TOC_ITEM_2_TITLE}}</text>
+    <text x="620" y="328" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" fill="#8A94A3">{{TOC_ITEM_2_DESC}}</text>
+    <line x1="560" y1="352" x2="1216" y2="352" stroke="#E4E7EC" stroke-width="1"/>
+  </g>
+  <g>
+    <text x="560" y="425" font-family="Arial,sans-serif" font-size="30" font-weight="bold" fill="#C79A3E">03</text>
+    <text x="620" y="420" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="24" font-weight="bold" fill="#1F2A3C">{{TOC_ITEM_3_TITLE}}</text>
+    <text x="620" y="448" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" fill="#8A94A3">{{TOC_ITEM_3_DESC}}</text>
+    <line x1="560" y1="472" x2="1216" y2="472" stroke="#E4E7EC" stroke-width="1"/>
+  </g>
+  <g>
+    <text x="560" y="545" font-family="Arial,sans-serif" font-size="30" font-weight="bold" fill="#C79A3E">04</text>
+    <text x="620" y="540" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="24" font-weight="bold" fill="#1F2A3C">{{TOC_ITEM_4_TITLE}}</text>
+    <text x="620" y="568" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" fill="#8A94A3">{{TOC_ITEM_4_DESC}}</text>
+    <line x1="560" y1="592" x2="1216" y2="592" stroke="#E4E7EC" stroke-width="1"/>
+  </g>
+
+  <!-- Footer -->
+  <line x1="64" y1="676" x2="1216" y2="676" stroke="#E4E7EC" stroke-width="1"/>
+  <text x="64" y="701" font-family="Arial,sans-serif" font-size="12" fill="#9AA3B0">积木网(JEEMOO.COM)</text>
+</svg>

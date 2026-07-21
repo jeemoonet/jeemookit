@@ -1,0 +1,58 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="1280" height="720" fill="#F4F5F7"/>
+  <rect x="64" y="52" width="120" height="26" rx="13" fill="#C79A3E"/>
+  <text x="124" y="70" font-family="Arial,sans-serif" font-size="13" font-weight="bold" letter-spacing="1.5" fill="#1A1D24" text-anchor="middle">{{TAG}}</text>
+  <text x="64" y="122" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="34" font-weight="bold" fill="#1F2A3C">{{PAGE_TITLE}}</text>
+  <rect x="64" y="140" width="4" height="20" fill="#2E6DA4"/>
+  <text x="78" y="156" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" fill="#5A6472">{{KEY_MESSAGE}}</text>
+
+  <rect x="64" y="184" width="340" height="452" rx="12" fill="#152238"/>
+  <text x="88" y="252" font-family="Arial,sans-serif" font-size="44" font-weight="bold" fill="#C79A3E">S2</text>
+  <text x="88" y="292" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="22" font-weight="bold" fill="#FFFFFF">{{SIDE_TITLE}}</text>
+  <line x1="88" y1="312" x2="380" y2="312" stroke="#2C3B58" stroke-width="1"/>
+  <text x="88" y="352" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" fill="#D6DCE6">&#31532;&#19968;&#21608;&#20132;&#20184;&#21487;&#36816;&#34892;&#20999;&#29255;</text>
+  <text x="88" y="388" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" fill="#D6DCE6">&#29992;&#30495;&#23454;&#26679;&#26412;&#65292;&#19981;&#29992;&#28436;&#31034;&#25968;&#25454;</text>
+  <text x="88" y="424" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" fill="#D6DCE6">&#20027;&#36335;&#24452;&#20248;&#20808;&#65292;&#30733;&#25481;&#26049;&#25903;</text>
+  <text x="88" y="472" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="13" fill="#8A94A3">Mock &#19982;&#20154;&#24037;&#29615;&#33410;&#21487;&#23384;&#22312;&#65292;</text>
+  <text x="88" y="494" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="13" fill="#8A94A3">&#20294;&#36793;&#30028;&#24517;&#39035;&#20844;&#24320;&#12289;&#21487;&#36861;&#28335;</text>
+  <rect x="88" y="556" width="292" height="48" rx="8" fill="#C79A3E"/>
+  <text x="234" y="587" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="17" font-weight="bold" fill="#152238" text-anchor="middle">&#36305;&#36890; &#8800; &#19978;&#32447;</text>
+
+  <text x="432" y="205" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="18" font-weight="bold" fill="#1F2A3C">S3 &#183;&#32;&#22235;&#36947;&#19978;&#32447;&#38376;</text>
+
+  <rect x="432" y="224" width="384" height="196" rx="10" fill="#FFFFFF" stroke="#E4E7EC" stroke-width="1"/>
+  <rect x="432" y="224" width="384" height="42" rx="10" fill="#2E6DA4"/>
+  <rect x="432" y="248" width="384" height="18" fill="#2E6DA4"/>
+  <text x="454" y="252" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="17" font-weight="bold" fill="#FFFFFF">&#19994;&#21153;&#38376;</text>
+  <text x="454" y="304" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" font-weight="bold" fill="#1F2A3C">&#26159;&#21542;&#25913;&#21892;&#21407;&#23450;&#19994;&#21153;&#25351;&#26631;</text>
+  <text x="454" y="336" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="14" fill="#8A94A3">&#23545;&#29031; S1 &#20923;&#32467;&#30340;&#39564;&#25910;&#25351;&#26631;&#36880;&#39033;&#26680;&#23545;</text>
+  <text x="454" y="392" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="14" fill="#C4382A">&#19981;&#36798;&#26631;&#36864;&#22238; S2 &#35843;&#25972;&#65292;&#19981;&#30828;&#19978;</text>
+
+  <rect x="832" y="224" width="384" height="196" rx="10" fill="#FFFFFF" stroke="#E4E7EC" stroke-width="1"/>
+  <rect x="832" y="224" width="384" height="42" rx="10" fill="#C79A3E"/>
+  <rect x="832" y="248" width="384" height="18" fill="#C79A3E"/>
+  <text x="854" y="252" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="17" font-weight="bold" fill="#1A1D24">&#36136;&#37327;&#38376;</text>
+  <text x="854" y="304" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" font-weight="bold" fill="#1F2A3C">&#20934;&#30830;&#32;&#183;&#32;&#31283;&#23450;&#32;&#183;&#32;&#21487;&#35299;&#37322;&#32;&#183;&#32;&#36793;&#30028;&#34892;&#20026;</text>
+  <text x="854" y="336" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="14" fill="#8A94A3">&#29992;&#35780;&#20272;&#38598;&#19982;&#32418;&#38431;&#27979;&#35797;&#35206;&#30422;&#20856;&#22411;&#19982;&#36793;&#30028;</text>
+  <text x="854" y="392" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="14" fill="#C4382A">&#20986;&#38169;&#27169;&#24335;&#24517;&#39035;&#24050;&#30693;&#19988;&#21487;&#25511;</text>
+
+  <rect x="432" y="440" width="384" height="196" rx="10" fill="#FFFFFF" stroke="#E4E7EC" stroke-width="1"/>
+  <rect x="432" y="440" width="384" height="42" rx="10" fill="#2E6DA4"/>
+  <rect x="432" y="464" width="384" height="18" fill="#2E6DA4"/>
+  <text x="454" y="468" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="17" font-weight="bold" fill="#FFFFFF">&#24037;&#31243;&#38376;</text>
+  <text x="454" y="520" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" font-weight="bold" fill="#1F2A3C">&#26435;&#38480;&#32;&#183;&#32;&#26085;&#24535;&#32;&#183;&#32;&#30417;&#25511;&#32;&#183;&#32;&#23433;&#20840;</text>
+  <text x="454" y="552" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="14" fill="#8A94A3">&#25509;&#20837;&#20225;&#19994;&#26082;&#26377;&#36134;&#21495;&#20307;&#31995;&#19982;&#36816;&#32500;&#20307;&#31995;</text>
+  <text x="454" y="608" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="14" fill="#C4382A">Demo &#24037;&#31243;&#19982;&#29983;&#20135;&#24037;&#31243;&#26159;&#20004;&#22238;&#20107;</text>
+
+  <rect x="832" y="440" width="384" height="196" rx="10" fill="#FFFFFF" stroke="#E4E7EC" stroke-width="1"/>
+  <rect x="832" y="440" width="384" height="42" rx="10" fill="#C79A3E"/>
+  <rect x="832" y="464" width="384" height="18" fill="#C79A3E"/>
+  <text x="854" y="468" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="17" font-weight="bold" fill="#1A1D24">&#27835;&#29702;&#38376;</text>
+  <text x="854" y="520" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="15" font-weight="bold" fill="#1F2A3C">&#20154;&#24037;&#25509;&#31649;&#32;&#183;&#32;&#23457;&#35745;&#36861;&#28335;</text>
+  <text x="854" y="552" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="14" fill="#8A94A3">AI &#19981;&#30830;&#23450;&#25110;&#20986;&#38169;&#26102;&#65292;&#26126;&#30830;&#30001;&#35841;&#20828;&#24213;</text>
+  <text x="854" y="608" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="14" fill="#C4382A">&#26080;&#20828;&#24213;&#26426;&#21046;&#30340;&#35797;&#28857;&#19981;&#20801;&#35768;&#25193;&#22823;</text>
+
+  <line x1="64" y1="668" x2="1216" y2="668" stroke="#E4E7EC" stroke-width="1"/>
+  <text x="64" y="693" font-family="Arial,sans-serif" font-size="12" fill="#9AA3B0">&#31215;&#26408;&#32593;(JEEMOO.COM)</text>
+  <text x="1216" y="693" font-family="Arial,sans-serif" font-size="12" fill="#9AA3B0" text-anchor="end">{{PAGE_NUM}}</text>
+</svg>

@@ -1,0 +1,47 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="1280" height="720" fill="#F4F5F7"/>
+  <text x="64" y="72" font-family="Arial,sans-serif" font-size="14" font-weight="bold" letter-spacing="3" fill="#8A94A3">{{EYEBROW}}</text>
+  <text x="64" y="120" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="34" font-weight="bold" fill="#1F2A3C">{{PAGE_TITLE}}</text>
+  <rect x="66" y="136" width="120" height="4" fill="#C79A3E"/>
+
+  <text x="341" y="360" font-family="Arial,sans-serif" font-size="34" font-weight="bold" fill="#C79A3E" text-anchor="middle">&#8250;</text>
+  <text x="639" y="360" font-family="Arial,sans-serif" font-size="34" font-weight="bold" fill="#C79A3E" text-anchor="middle">&#8250;</text>
+  <text x="937" y="360" font-family="Arial,sans-serif" font-size="34" font-weight="bold" fill="#C79A3E" text-anchor="middle">&#8250;</text>
+
+  <rect x="64" y="184" width="256" height="336" rx="12" fill="#FFFFFF" stroke="#E4E7EC" stroke-width="1"/>
+  <circle cx="192" cy="252" r="34" fill="#F1ECDF"/>
+  <rect x="178" y="240" width="28" height="20" rx="3" fill="none" stroke="#152238" stroke-width="2.5"/><circle cx="186" cy="238" r="4" fill="#152238"/>
+  <text x="192" y="326" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="20" font-weight="bold" fill="#1F2A3C" text-anchor="middle">&#29615;&#33410;&#19968;</text>
+  <text x="192" y="366" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="14" fill="#8A94A3" text-anchor="middle">&#35828;&#26126;&#25991;&#23383;&#31532;&#19968;&#34892;</text>
+  <text x="192" y="392" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="14" fill="#8A94A3" text-anchor="middle">&#35828;&#26126;&#25991;&#23383;&#31532;&#20108;&#34892;</text>
+
+  <rect x="362" y="184" width="256" height="336" rx="12" fill="#FFFFFF" stroke="#E4E7EC" stroke-width="1"/>
+  <circle cx="490" cy="252" r="34" fill="#F1ECDF"/>
+  <circle cx="490" cy="250" r="10" fill="none" stroke="#152238" stroke-width="2.5"/><line x1="483" y1="262" x2="478" y2="267" stroke="#152238" stroke-width="2.5"/>
+  <text x="490" y="326" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="20" font-weight="bold" fill="#1F2A3C" text-anchor="middle">&#29615;&#33410;&#20108;</text>
+  <text x="490" y="366" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="14" fill="#8A94A3" text-anchor="middle">&#35828;&#26126;&#25991;&#23383;&#31532;&#19968;&#34892;</text>
+  <text x="490" y="392" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="14" fill="#8A94A3" text-anchor="middle">&#35828;&#26126;&#25991;&#23383;&#31532;&#20108;&#34892;</text>
+
+  <rect x="660" y="184" width="256" height="336" rx="12" fill="#FFFFFF" stroke="#E4E7EC" stroke-width="1"/>
+  <circle cx="788" cy="252" r="34" fill="#F1ECDF"/>
+  <ellipse cx="788" cy="242" rx="14" ry="6" fill="none" stroke="#152238" stroke-width="2.5"/><path d="M774 242 v14 q14 8 28 0 v-14" fill="none" stroke="#152238" stroke-width="2.5"/>
+  <text x="788" y="326" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="20" font-weight="bold" fill="#1F2A3C" text-anchor="middle">&#29615;&#33410;&#19977;</text>
+  <text x="788" y="366" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="14" fill="#8A94A3" text-anchor="middle">&#35828;&#26126;&#25991;&#23383;&#31532;&#19968;&#34892;</text>
+  <text x="788" y="392" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="14" fill="#8A94A3" text-anchor="middle">&#35828;&#26126;&#25991;&#23383;&#31532;&#20108;&#34892;</text>
+
+  <rect x="958" y="184" width="256" height="336" rx="12" fill="#FFFFFF" stroke="#E4E7EC" stroke-width="1"/>
+  <circle cx="1086" cy="252" r="34" fill="#F1ECDF"/>
+  <path d="M1076 246 h20 M1076 246 l-4 4 M1076 258 h20 l-4 4 M1096 258 l4 -4" fill="none" stroke="#152238" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="1086" y="326" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="20" font-weight="bold" fill="#1F2A3C" text-anchor="middle">&#29615;&#33410;&#22235;</text>
+  <text x="1086" y="366" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="14" fill="#8A94A3" text-anchor="middle">&#35828;&#26126;&#25991;&#23383;&#31532;&#19968;&#34892;</text>
+  <text x="1086" y="392" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="14" fill="#8A94A3" text-anchor="middle">&#35828;&#26126;&#25991;&#23383;&#31532;&#20108;&#34892;</text>
+
+  <rect x="64" y="556" width="1152" height="84" rx="12" fill="#152238"/>
+  <circle cx="118" cy="598" r="22" fill="#C79A3E"/>
+  <path d="M108 598 h20 M128 598 l-5 -5 M128 598 l-5 5" fill="none" stroke="#152238" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="156" y="604" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="17" fill="#E6E9EF">{{CALLOUT}}</text>
+
+  <line x1="64" y1="668" x2="1216" y2="668" stroke="#E4E7EC" stroke-width="1"/>
+  <text x="64" y="693" font-family="Arial,sans-serif" font-size="12" fill="#9AA3B0">&#31215;&#26408;&#32593;(JEEMOO.COM)</text>
+  <text x="1216" y="693" font-family="Arial,sans-serif" font-size="12" fill="#9AA3B0" text-anchor="end">{{PAGE_NUM}}</text>
+</svg>

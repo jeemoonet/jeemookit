@@ -1,4 +1,0 @@
-# 本地覆盖配置（可选），勿提交密钥
-secrets.local.json
-*.pem
-*.key

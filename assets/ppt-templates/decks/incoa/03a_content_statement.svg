@@ -1,0 +1,24 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="1280" height="720" fill="#F4F5F7"/>
+  <text x="80" y="150" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="16" font-weight="bold" letter-spacing="2" fill="#8A94A3">{{EYEBROW}}</text>
+  <text x="80" y="248" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="52" font-weight="bold" fill="#1F2A3C">{{STATEMENT}}</text>
+  <text x="80" y="322" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="52" font-weight="bold" fill="#1F2A3C">?? <tspan font-style="italic" fill="#C79A3E">????????</tspan></text>
+  <rect x="82" y="352" width="140" height="3" fill="#C79A3E"/>
+  <text x="82" y="404" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="17" fill="#5A6472">{{STATEMENT_SUB}}</text>
+  <rect x="80" y="452" width="300" height="76" rx="14" fill="#152238"/>
+  <circle cx="128" cy="490" r="22" fill="#C79A3E"/>
+  <circle cx="128" cy="490" r="9" fill="none" stroke="#152238" stroke-width="3"/>
+  <line x1="135" y1="497" x2="143" y2="505" stroke="#152238" stroke-width="3"/>
+  <text x="170" y="497" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="19" font-weight="bold" fill="#FFFFFF">{{PILL_1}}</text>
+  <rect x="404" y="452" width="300" height="76" rx="14" fill="#152238"/>
+  <circle cx="452" cy="490" r="22" fill="#C79A3E"/>
+  <path d="M443 484 h16 M459 484 l4 4 M461 496 h-16 M445 496 l-4 -4" fill="none" stroke="#152238" stroke-width="3" stroke-linejoin="round"/>
+  <text x="494" y="497" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="19" font-weight="bold" fill="#FFFFFF">{{PILL_2}}</text>
+  <rect x="728" y="452" width="300" height="76" rx="14" fill="#152238"/>
+  <circle cx="776" cy="490" r="22" fill="#C79A3E"/>
+  <path d="M767 490 l6 6 l12 -13" fill="none" stroke="#152238" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="818" y="497" font-family="'Microsoft YaHei',Arial,sans-serif" font-size="19" font-weight="bold" fill="#FFFFFF">{{PILL_3}}</text>
+  <line x1="80" y1="676" x2="1200" y2="676" stroke="#E4E7EC" stroke-width="1"/>
+  <text x="80" y="701" font-family="Arial,sans-serif" font-size="12" fill="#9AA3B0">???(JEEMOO.COM)</text>
+  <text x="1200" y="701" font-family="Arial,sans-serif" font-size="12" fill="#9AA3B0" text-anchor="end">{{PAGE_NUM}}</text>
+</svg>

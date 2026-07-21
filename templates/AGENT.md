@@ -7,7 +7,6 @@
 ```text
 /
 ├── AGENT.md                        # 本文件
-├── .jeemoo/project.json            # 部署目标（serverId、remotePath，无密钥）
 ├── src/                            # 开发代码，根据开发框架可以细分web/admin/api等子目录
 ├── doc/                            # 项目文档（按阶段分子目录，见 §2）
 └── scripts/                        # 启动/部署脚本（start.sh、start.ps1、deploy.ps1）
@@ -31,7 +30,7 @@
 
 ## 3. 服务器部署
 
-配置与密钥分离：**项目内只存服务器 ID 与远程路径，密钥在用户目录**。
+部署信息写在本节供 Agent 参考；**SSH 私钥与 API 密钥仅存本机**（如 `~/.jeemoo/keys/`、`~/.jeemoo/secrets.env`），永不进 Git。
 
 服务器部署：
 Server: OpenClaw1Y
@@ -71,8 +70,4 @@ SSH KEY: JeemooApps.pem
 ```bash
 FRONTEND_DIR=frontend BACKEND_DIR=backend FRONTEND_URL=http://localhost:5173 bash scripts/start.sh
 ```
-
-## 5. 前端落地页 / 营销页
-
-做落地页、作品集、营销站或 UI 改版时，优先加载全局 Skill **`design-taste-frontend`**（taste-skill v2）：先 Brief 推断与三档 Dial，再实现，交付前跑 Pre-Flight。
 

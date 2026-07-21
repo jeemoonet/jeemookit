@@ -12,7 +12,7 @@
 
 ## 1. 产品是什么
 
-**jeemookit** 是 Jeemoo 的 Cursor Agent 协作工具包：在新项目启动时一键安装全局 Skills、项目 `AGENT.md` 与部署元数据，让「1 人 + AI」能稳定完成文档转换、配图导出、飞书同步与前端落地页设计。
+**jeemookit** 是 Jeemoo 的 Cursor Agent 协作工具包：在新项目启动时一键安装全局 Skills、项目 `AGENT.md` 与启动脚本，让「1 人 + AI」能稳定完成文档转换、配图导出与飞书同步。
 
 ![开发者使用 jeemookit：文档在 PDF/Word、Markdown、Word 导出与飞书之间流转](assets/jeemookit-usage-guide.png)
 
@@ -22,7 +22,7 @@
 flowchart LR
     I[install 脚本] --> S[~/.cursor/skills/]
     I --> A[项目 AGENT.md]
-    I --> P[.jeemoo/project.json]
+    I --> R[scripts/start.*]
     S --> U[Cursor Agent 对话触发]
     U --> D[文档 / 前端任务]
 ```
@@ -73,13 +73,13 @@ chmod +x /path/to/jeemookit/install.sh
 1. 读取 `manifest.json`
 2. 把 Skills 复制到 `~/.cursor/skills/`（Windows：`%USERPROFILE%\.cursor\skills\`）
 3. 按需执行 pip / npm 依赖安装
-4. 向目标项目写入 `AGENT.md`、`.jeemoo/project.json`、启动脚本模板
+4. 向目标项目写入 `AGENT.md` 与启动脚本模板
 
 ```mermaid
 flowchart TB
     A[运行 install] --> B[读 manifest.json]
     B --> C[安装全局 Skills]
-    B --> D[写入 AGENT.md / .jeemoo]
+    B --> D[写入 AGENT.md / scripts]
     C --> E[pip / npm]
     D --> F[项目就绪]
     E --> F
@@ -91,10 +91,9 @@ flowchart TB
 |------|------|
 | `-ProjectRoot` / `--project-root` | 目标项目路径（不存在则创建） |
 | `-SkillsOnly` / `--skills-only` | 仅更新全局 Skills |
-| `-AgentOnly` / `--agent-only` | 仅复制 AGENT.md 与项目配置 |
+| `-AgentOnly` / `--agent-only` | 仅复制 AGENT.md 与启动脚本 |
 | `-SkipDeps` / `--skip-deps` | 跳过 pip / npm |
 | `-ForceAgent` / `--force-agent` | 覆盖已有 `AGENT.md` |
-| `-ForceProject` / `--force-project` | 覆盖 `.jeemoo/project.json` |
 
 **只升级 Skills（日常最常用）：**
 
@@ -115,14 +114,10 @@ D:\Dev\jeemookit\install.ps1 -SkillsOnly
 ├── md-to-word/
 ├── txt-to-image/
 ├── md-to-feishu/
-├── feishu-to-md/
-└── design-taste-frontend/
+└── feishu-to-md/
 
 my-app/
 ├── AGENT.md
-├── .jeemoo/
-│   ├── project.json
-│   └── .gitignore
 └── scripts/          # start.sh / start.ps1（若模板已提供）
 ```
 
@@ -143,9 +138,8 @@ my-app/
 | 「给设计文档画架构图 / 导出 Word」 | `txt-to-image` → `md-to-word` |
 | 「上传到飞书」 | `md-to-feishu` |
 | 「把飞书文档下载成 md」 | `feishu-to-md` |
-| 「按 taste-skill 做落地页」 | `design-taste-frontend` |
 
-也可以显式点名：`用 design-taste-frontend`、`@skills/txt-to-image`。
+也可以显式点名：`@skills/txt-to-image`、`用 md-to-word 导出`。
 
 ### 4.2 文档生产主链路
 
@@ -261,17 +255,6 @@ python ~/.cursor/skills/feishu-to-md/scripts/feishu2md.py "doxcnXXXXXXXXXXXX" -o
 
 凭证与 `md-to-feishu` 共用 `~/.jeemoo/secrets.env`。
 
-### 5.7 design-taste-frontend · 前端落地页 / 改版
-
-**用途：** Anti-slop 前端（落地页、作品集、营销站、UI 改版）。不适用仪表盘、复杂数据表、多步表单。
-
-对话示例：
-
-- 「用 design-taste-frontend 做 SaaS 落地页」
-- 「按 taste-skill 改版现有首页」
-
-Agent 会按序：**Brief 推断 → 三档 Dial → 选型 → 实现 → Pre-Flight**。细则见该 Skill 的 `reference.md`。
-
 ---
 
 ## 6. 典型任务手册
@@ -279,9 +262,8 @@ Agent 会按序：**Brief 推断 → 三档 Dial → 选型 → 实现 → Pre-F
 ### 6.1 新开业务项目
 
 1. 运行 `install.ps1` / `install.sh`，指定 `-ProjectRoot`
-2. 编辑项目 `AGENT.md`（目录约定、启动脚本）
-3. 按需填写 `.jeemoo/project.json` 的部署目标
-4. 用 `scripts/start.sh` 或 `scripts/start.ps1` 启动前后端（若已生成）
+2. 编辑项目 `AGENT.md`（目录约定、启动脚本、部署说明）
+3. 用 `scripts/start.sh` 或 `scripts/start.ps1` 启动前后端（若已生成）
 
 ### 6.2 公文 / 扫描 PDF 转可编辑稿
 
@@ -307,12 +289,6 @@ Agent 会按序：**Brief 推断 → 三档 Dial → 选型 → 实现 → Pre-F
 2. 飞书修订后 →「把该飞书文档下载成 md」
 3. 继续本地编辑后再次同步
 
-### 6.6 营销落地页
-
-1. 「用 design-taste-frontend 做落地页，受众是 …，风格接近 …」
-2. 确认 Agent 给出的 Design Read 与 Dial
-3. 需要场景图时配合 `txt-to-image` 生成宣传图
-
 ---
 
 ## 7. 项目约定与安全
@@ -323,7 +299,6 @@ Agent 会按序：**Brief 推断 → 三档 Dial → 选型 → 实现 → Pre-F
 |------|------|--------|
 | Skills 源码 | kit 仓库 → `~/.cursor/skills/` | kit ✅ |
 | AGENT.md | 项目根 | 项目 ✅ |
-| project.json | `.jeemoo/` | 项目 ✅ |
 | 飞书 / API / SSH 密钥 | `~/.jeemoo/secrets.env`、`keys/` | ❌ |
 
 ### 7.2 飞书凭证
@@ -336,14 +311,9 @@ cp /path/to/jeemookit/templates/secrets.env.example ~/.jeemoo/secrets.env
 
 密钥**永不**提交到任何仓库。
 
-### 7.3 部署权限
+### 7.3 部署约定
 
-`.jeemoo/project.json` 中 `permissions` 默认：
-
-- `agentCanDeploy: false`
-- `requireConfirmBeforeDeploy: true`
-
-Agent 不会在未确认时自动部署。
+部署目标写在项目 `AGENT.md`；自动部署须经人工确认，SSH 私钥仅存本机。
 
 ---
 
@@ -357,7 +327,6 @@ Agent 不会在未确认时自动部署。
 | 飞书 login 失败 | 检查 `secrets.env` 与开放平台回调地址 |
 | 飞书上传无图 | 勿加 `--no-sync`；确认 `md-to-word` 已安装 |
 | Word 转 MD 失败 | 确认是 `.docx` 而非 `.doc` |
-| 落地页观感「AI 味」 | 明确要求加载 `design-taste-frontend` 并完成 Pre-Flight |
 
 手动补装依赖示例：
 
@@ -381,14 +350,13 @@ cd ~/.cursor/skills/md-to-word && npm install
 | MD → Word | 「导出 Word」或 `md2docx.py` |
 | MD → 飞书 | 「上传到飞书」或 `md2feishu.py` |
 | 飞书 → MD | 「飞书转 md」或 `feishu2md.py` |
-| 落地页设计 | 「用 design-taste-frontend」 |
 | 扩展 Skill | `skills/<name>/` + 注册 `manifest.json` |
 
 ### 版本历史
 
 | 版本 | 主要变化 |
 |------|----------|
-| 1.4.0 | 新增 `word-to-md`、`design-taste-frontend`；文档补齐 `feishu-to-md` |
+| 1.4.0 | 新增 `word-to-md`；文档补齐 `feishu-to-md` |
 | 1.3.0 | 新增 `pdf-to-md`（含 OCR） |
 | 1.2.0 | 新增 `md-to-feishu`；配图 Skill 更名为 `txt-to-image` |
 | 1.0.0 | 初始：`md-to-word`、配图规范、AGENT 与 project 模板 |

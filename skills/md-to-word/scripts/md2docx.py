@@ -987,10 +987,6 @@ def configure_table_autofit(table) -> None:
     tbl_w.set(qn("w:type"), "pct")
     tbl_w.set(qn("w:w"), "5000")
 
-    tbl_grid = tbl.tblGrid
-    if tbl_grid is not None:
-        tbl.remove(tbl_grid)
-
     for row in table.rows:
         for cell in row.cells:
             tc_pr = cell._element.get_or_add_tcPr()
@@ -1067,6 +1063,8 @@ def add_table(document: Document, rows: list[list[str]]) -> None:
                 set_cell_shading(cell, "F0F3F6")
                 for run in paragraph.runs:
                     set_run_font(run, size_pt=10, bold=True, font_name="微软雅黑", east_asia="微软雅黑")
+
+    set_table_column_widths(table, compute_column_widths(rows, col_count))
 
 
 def image_display_width(png_path: Path, max_cm: float = 15.0) -> Cm:
