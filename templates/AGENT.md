@@ -19,7 +19,7 @@
 
 | 子目录             | 阶段    | 放置内容                                                                          |
 | --------------- | ----- | ----------------------------------------------------------------------------- |
-| `doc/0.项目管理/`   | 项目管理  | `DOC-PLAN-`*、`DOC-MVP-*`                                                      |
+| `doc/0.项目管理/`   | 项目管理  | `DOC-PLAN-`*、`DOC-MVP-`*                                                      |
 | `doc/1.需求调研/`   | 需求    | `DOC-REQ-*`                                                                   |
 | `doc/2.产品设计/`   | 产品与设计 | `DOC-PROD-*`、`DOC-USER-*`、`DOC-ADMIN-*` ；子目录 `sop/`、`knowledge-base/`、`demo/` |
 | `doc/3.开发/`     | 开发    | `DOC-DEV-*、DOC-DB-*`（技术方案、开发规范）                                               |
@@ -28,20 +28,13 @@
 | `doc/README.md` | —     | 文档总索引                                                                         |
 
 
+
+
 ## 3. 服务器部署
 
 部署信息写在本节供 Agent 参考；**SSH 私钥与 API 密钥仅存本机**（如 `~/.jeemoo/keys/`、`~/.jeemoo/secrets.env`），永不进 Git。
 
-服务器部署：
-Server: OpenClaw1Y
-IP: 43.128.98.192
-User: ubuntu
-SSH KEY: openclaw.pem
 
-Server: JeemooApps
-IP: 81.70.187.19
-User: ubuntu
-SSH KEY: JeemooApps.pem
 
 ## 4. 本地启动脚本（`scripts/`）
 
@@ -53,21 +46,7 @@ SSH KEY: JeemooApps.pem
 启动脚本强制约定（Agent 必须遵守）：
 
 - 必须生成并维护 `scripts/start.*`（至少包含 `start.sh` 与 `start.ps1`）。
-- 启动应用时必须优先使用 `scripts/start.*`，禁止直接要求用户分别手动启动前后端。
+- 启动应用时必须优先使用 `scripts/start.*`
 - 若项目目录结构变化，必须同步更新 `scripts/start.*` 的默认目录与命令，确保新成员一键可启动。
 - 新增前后端启动相关文档时，命令示例必须使用 `scripts/start.*`。
-
-可选环境变量（默认值）：
-
-- `FRONTEND_DIR`（`src/web`）
-- `BACKEND_DIR`（`src/api`）
-- `FRONTEND_CMD`（`npm run dev`）
-- `BACKEND_CMD`（`npm run dev`）
-- `FRONTEND_URL`（`http://localhost:3000`）
-
-示例：
-
-```bash
-FRONTEND_DIR=frontend BACKEND_DIR=backend FRONTEND_URL=http://localhost:5173 bash scripts/start.sh
-```
 
