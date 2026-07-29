@@ -56,6 +56,15 @@
         "npm": false,
         "pip": "scripts/requirements.txt"
       }
+    },
+    {
+      "id": "jeemoo-init",
+      "version": "1.0.0",
+      "path": "skills/jeemoo-init",
+      "install": {
+        "npm": false,
+        "pip": false
+      }
     }
   ],
   "templates": {

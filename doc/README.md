@@ -199,12 +199,11 @@ python ~/.cursor/skills/word-to-md/scripts/docx2md.py "文档.docx" -o "输出/�
 | 类型 | 适用 | 格式 | 存放 |
 |------|------|------|------|
 | 结构图 | 架构、流程、时序 | Mermaid 代码块 | 内嵌 MD |
-| 专利图 | 交底书附图 | SVG | `assets/图N-描述.svg` |
 | 宣传图 | 场景、主视觉 | PNG（GenerateImage） | `assets/主题-简述.png` |
 
-对话示例：「给技术方案补整体架构 Mermaid」「专利交底书画图 1」「产品说明书加用户场景图」。
+对话示例：「给技术方案补整体架构 Mermaid」「产品说明书加用户场景图」。
 
-专利图禁用 GenerateImage；外部图统一放文档同级 `assets/`。
+宣传图放文档同级 `assets/`。不再用本 Skill 生成专利 SVG 附图；交底书结构示意用 Mermaid。
 
 ### 5.4 md-to-word · Markdown → Word
 
@@ -277,13 +276,7 @@ python ~/.cursor/skills/feishu-to-md/scripts/feishu2md.py "doxcnXXXXXXXXXXXX" -o
 2. 「按 txt-to-image 补架构 Mermaid」
 3. 「导出 Word」
 
-### 6.4 专利交底书
-
-1. 编写交底书 MD
-2. 「画专利附图（SVG，图号对齐）」
-3. 「导出 Word」交付
-
-### 6.5 飞书双向协作
+### 6.4 飞书双向协作
 
 1. 本地 MD →「上传到飞书」
 2. 飞书修订后 →「把该飞书文档下载成 md」
@@ -346,7 +339,7 @@ cd ~/.cursor/skills/md-to-word && npm install
 | 只更新 Skills | `install.ps1 -SkillsOnly` |
 | PDF → MD | 「PDF 转 MD」或 `pdf2md.py` |
 | Word → MD | 「Word 转 MD」或 `docx2md.py` |
-| 配图 | 「结构图 / 专利图 / 宣传图」+ `txt-to-image` |
+| 配图 | 「结构图 / 宣传图」+ `txt-to-image` |
 | MD → Word | 「导出 Word」或 `md2docx.py` |
 | MD → 飞书 | 「上传到飞书」或 `md2feishu.py` |
 | 飞书 → MD | 「飞书转 md」或 `feishu2md.py` |

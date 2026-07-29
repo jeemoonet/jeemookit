@@ -1,3 +1,9 @@
+---
+description: Jeemoo project Agent conventions (doc layout, start scripts)
+alwaysApply: true
+---
+
+<!-- jeemoo-agent-begin -->
 # Agent 协作说明
 
 本文件供 **Cursor Agent / 开发者** 快速理解仓库结构与文档归档规则。人类可读索引见 [doc/README.md](doc/README.md)。
@@ -21,7 +27,7 @@
 | --------------- | ----- | ----------------------------------------------------------------------------- |
 | `doc/0.项目管理/`   | 项目管理  | `DOC-PLAN-`*、*`DOC-MVP-`                                                      |
 | `doc/1.需求调研/`   | 需求    | `DOC-REQ-*`                                                                   |
-| `doc/2.产品设计/`   | 产品与设计 | `DOC-PROD-*`、`DOC-USER-*`、`DOC-ADMIN-*` ；子目录 `sop/`、`knowledge-base/`、`demo/` |
+| `doc/2.产品设计/`   | 产品与设计 | `DOC-PROD-*` |
 | `doc/3.开发/`     | 开发    | `DOC-DEV-*、DOC-DB-*`（技术方案、开发规范）                                               |
 | `doc/4.部署发布/`   | 部署发布  | `DOC-SRV-*`、`DOC-DEP-*`、启动/部署操作手册                                             |
 | `doc/9.参考资料/`   | 参考    | 外部技术分析（无正式 DOC 编号）                                                            |
@@ -43,4 +49,4 @@
 - 启动应用时必须优先使用 `scripts/start.*`
 - 若项目目录结构变化，必须同步更新 `scripts/start.*` 的默认目录与命令，确保新成员一键可启动。
 - 新增前后端启动相关文档时，命令示例必须使用 `scripts/start.*`。
-
+<!-- jeemoo-agent-end -->

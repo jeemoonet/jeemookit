@@ -3,7 +3,7 @@ name: md-to-word
 description: >-
   将 Markdown 文档（含 Mermaid 代码块、图例 SVG/PNG、标准图片引用）导出为 Word
   (.docx)，图片自动渲染并嵌入。在用户说「导出 Word」「转成 docx」「生成 Word
-  文档」，或完成设计文档/专利交底书后需要交付 Word 时使用。
+  文档」，或完成设计文档后需要交付 Word 时使用。
 ---
 
 # Markdown 转 Word
@@ -58,7 +58,7 @@ python "$env:USERPROFILE\.cursor\skills\md-to-word\scripts\md2docx.py" "路径/�
 ## 图片路径规则
 
 - 相对路径以 **Markdown 文件所在目录** 为基准。
-- 专利附图：`assets/图N-描述.svg`，正文在「附图说明」引用。
+- 已有 SVG/PNG 可放 `assets/` 后引用；本工具负责渲染嵌入，不负责生成专利附图。
 
 ## 缓存
 
