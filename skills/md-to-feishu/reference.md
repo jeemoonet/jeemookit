@@ -94,6 +94,7 @@ python ~/.cursor/skills/md-to-feishu/scripts/md2feishu.py login
 | 文件大小 | 同步模式 DOCX ≤ **600MB**；原始 MD ≤ **20MB** |
 | 扩展名 | `.md` / `.markdown` / `.mark` |
 | 缓存 | 项目 `.cache/md2feishu/` 存放中间 DOCX |
+| 标题去重 | 正文首个 H1 与文档标题（文件名 / `-t`）相同时自动去掉，避免飞书顶部重复 |
 | 内容截断 | 超出 docx 上限时 `extra` 字段会有提示码 |
 
 ---

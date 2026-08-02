@@ -22,7 +22,7 @@ from feishu_auth import (
     oauth_login,
     resolve_access_token,
 )
-from md_sync import sync_md_to_docx
+from md_sync import prepare_md_for_feishu, sync_md_to_docx
 
 POLL_INTERVAL_SEC = 1.5
 POLL_TIMEOUT_SEC = 120
@@ -163,18 +163,26 @@ def poll_import_result(domain: str, token: str, ticket: str) -> dict[str, Any]:
     raise RuntimeError(f"导入超时（>{POLL_TIMEOUT_SEC}s），ticket={ticket}")
 
 
-def prepare_upload_file(md_path: Path, *, sync: bool) -> tuple[Path, str, str]:
-    """Return (upload_path, import_extension, kind) where kind is md|docx."""
+def prepare_upload_file(
+    md_path: Path,
+    *,
+    sync: bool,
+    title: str | None = None,
+) -> tuple[Path, str, str, bool]:
+    """Return (upload_path, import_extension, kind, title_h1_stripped)."""
     md_path = md_path.resolve()
     if md_path.suffix.lower() == ".docx":
-        return md_path, "docx", "docx"
+        return md_path, "docx", "docx", False
+
+    doc_title = title or md_path.stem
+    prepared, stripped = prepare_md_for_feishu(md_path, doc_title)
 
     if not sync:
         ext = resolve_md_extension(md_path)
-        return md_path, ext, "md"
+        return prepared, ext, "md", stripped
 
-    docx_path = sync_md_to_docx(md_path)
-    return docx_path, "docx", "docx"
+    docx_path = sync_md_to_docx(prepared)
+    return docx_path, "docx", "docx", stripped
 
 
 def upload_to_feishu(
@@ -190,7 +198,10 @@ def upload_to_feishu(
     if source_md.suffix.lower() != ".docx" and not source_md.is_file():
         raise FileNotFoundError(f"文件不存在: {source_md}")
 
-    upload_path, import_ext, kind = prepare_upload_file(source_md, sync=sync)
+    doc_title = title or source_md.stem
+    upload_path, import_ext, kind, title_h1_stripped = prepare_upload_file(
+        source_md, sync=sync, title=doc_title
+    )
     profile = IMPORT_PROFILES[kind]
     max_bytes = profile["max_bytes"]
     size = upload_path.stat().st_size
@@ -202,7 +213,6 @@ def upload_to_feishu(
     if folder_token is None:
         folder_token = secrets.get("FEISHU_FOLDER_TOKEN") or None
 
-    doc_title = title or source_md.stem
     target_type = profile["target_type"]
     access_token = resolve_access_token(secrets, mode)
 
@@ -233,6 +243,7 @@ def upload_to_feishu(
         "sync": sync and kind == "docx" and source_md.suffix.lower() != ".docx",
         "uploaded_file": str(upload_path),
         "import_format": import_ext,
+        "title_h1_stripped": title_h1_stripped,
     }
 
 
@@ -273,6 +284,8 @@ def cmd_upload(args: argparse.Namespace) -> int:
         mode_label = "用户账号" if result["mode"] == "user" else "应用身份"
         sync_label = "已同步格式（Mermaid/SVG/图片→DOCX）" if result["sync"] else "原始 Markdown"
         print(f"已上传 ({mode_label}, {sync_label}): {result['title']}")
+        if result.get("title_h1_stripped"):
+            print("已去掉与文档标题重复的正文一级标题。")
         if result.get("url"):
             print(f"链接: {result['url']}")
         if result.get("uploaded_file") and result["sync"]:

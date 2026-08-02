@@ -3,10 +3,80 @@
 from __future__ import annotations
 
 import hashlib
+import re
 import shutil
 import subprocess
 import sys
+import unicodedata
 from pathlib import Path
+
+_FRONTMATTER_RE = re.compile(r"\A---[ \t]*\r?\n.*?\r?\n---[ \t]*\r?\n", re.DOTALL)
+_ATX_H1_RE = re.compile(r"^[ \t]{0,3}#(?!#)[ \t]+(.+?)[ \t]*#*[ \t]*$")
+_SETEXT_H1_RE = re.compile(
+    r"^[ \t]{0,3}(?P<title>\S[^\n]*?)\r?\n[ \t]{0,3}=+[ \t]*(?:\r?\n|$)",
+)
+
+
+def normalize_title(text: str) -> str:
+    """Normalize titles for comparison (whitespace / NFKC / light markdown)."""
+    text = unicodedata.normalize("NFKC", text or "")
+    text = re.sub(r"[*_`~]+", "", text)
+    text = text.replace("\u3000", " ")
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def strip_duplicate_leading_h1(content: str, doc_title: str) -> tuple[str, bool]:
+    """Remove leading H1 when it matches Feishu doc title (avoids duplicate display)."""
+    target = normalize_title(doc_title)
+    if not target or not content:
+        return content, False
+
+    prefix = ""
+    body = content
+    fm = _FRONTMATTER_RE.match(content)
+    if fm:
+        prefix = fm.group(0)
+        body = content[fm.end() :]
+
+    m_ws = re.match(r"\s*", body)
+    leading_ws_len = m_ws.end() if m_ws else 0
+    rest = body[leading_ws_len:]
+    if not rest:
+        return content, False
+
+    line_end = rest.find("\n")
+    first_line = rest if line_end < 0 else rest[:line_end]
+    atx = _ATX_H1_RE.match(first_line)
+    if atx:
+        if normalize_title(atx.group(1)) != target:
+            return content, False
+        after = "" if line_end < 0 else rest[line_end + 1 :]
+        after = re.sub(r"^\r?\n", "", after, count=1)
+        return prefix + after, True
+
+    setext = _SETEXT_H1_RE.match(rest)
+    if setext and normalize_title(setext.group("title")) == target:
+        after = rest[setext.end() :]
+        after = re.sub(r"^\r?\n", "", after, count=1)
+        return prefix + after, True
+
+    return content, False
+
+
+def prepare_md_for_feishu(md_path: Path, doc_title: str) -> tuple[Path, bool]:
+    """Return MD path for Feishu import; may write a cache copy without duplicate H1."""
+    md_path = md_path.resolve()
+    text = md_path.read_text(encoding="utf-8")
+    new_text, stripped = strip_duplicate_leading_h1(text, doc_title)
+    if not stripped:
+        return md_path, False
+
+    cache = cache_dir_for(md_path)
+    title_key = hashlib.sha256(normalize_title(doc_title).encode("utf-8")).hexdigest()[:8]
+    out = cache / f"{md_path.stem}-{content_fingerprint(md_path)}-noh1-{title_key}.md"
+    if not out.is_file() or out.read_text(encoding="utf-8") != new_text:
+        out.write_text(new_text, encoding="utf-8", newline="\n")
+    return out, True
 
 
 def find_python_for_md2docx() -> str:

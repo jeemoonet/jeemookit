@@ -52,6 +52,8 @@ python ~/.cursor/skills/md-to-feishu/scripts/md2feishu.py "文档.md" --no-sync
 
 中间 DOCX 缓存：项目根目录 `.cache/md2feishu/`（源文件未变时复用）。
 
+**标题去重**：飞书会显示文档名称，若正文开头的一级标题（ATX `#` 或 Setext `===`）与文档标题（文件名或 `-t`）相同，上传前自动去掉该 H1，避免顶部重复。
+
 ## Agent 工作流
 
 1. 默认 `--mode user`；无 token 时先 `login`。

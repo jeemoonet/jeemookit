@@ -412,6 +412,48 @@ def list_style_name(ordered: bool, level: int) -> str:
     return f"{base} {level + 1}"
 
 
+def _style_num_id(document: Document, style_name: str) -> Optional[int]:
+    """Return the numId linked by a paragraph style, if any."""
+    try:
+        style = document.styles[style_name]
+    except KeyError:
+        return None
+    p_pr = style._element.pPr
+    if p_pr is None or p_pr.numPr is None or p_pr.numPr.numId is None:
+        return None
+    return int(p_pr.numPr.numId.val)
+
+
+def create_restart_num_id(document: Document, style_name: str = "List Number") -> Optional[int]:
+    """
+    Create a new numbering instance that restarts at 1.
+
+    Word ties all 'List Number' paragraphs to one numId by default, so separate
+    Markdown ordered lists would continue (1..n then n+1...). A fresh numId with
+    startOverride restores per-list counting for DOCX and Feishu import.
+    """
+    base_num_id = _style_num_id(document, style_name)
+    if base_num_id is None:
+        return None
+    try:
+        numbering = document.part.numbering_part.numbering_definitions._numbering
+        base_num = numbering.num_having_numId(base_num_id)
+        abstract_num_id = base_num.abstractNumId.val
+        new_num = numbering.add_num(abstract_num_id)
+        new_num.add_lvlOverride(0).add_startOverride(1)
+        return int(new_num.numId)
+    except Exception:  # noqa: BLE001 - fall back to style default numbering
+        return None
+
+
+def apply_paragraph_num_id(paragraph, num_id: int, level: int = 0) -> None:
+    """Bind a paragraph to a numbering instance (and list level)."""
+    p_pr = paragraph._element.get_or_add_pPr()
+    num_pr = p_pr.get_or_add_numPr()
+    num_pr.get_or_add_numId().val = num_id
+    num_pr.get_or_add_ilvl().val = max(level, 0)
+
+
 def parse_blocks(text: str) -> list[Block]:
     lines = text.splitlines()
     blocks: list[Block] = []
@@ -744,7 +786,13 @@ def add_paragraph(document: Document, text: str, style: Optional[str] = None) ->
     add_inline_runs(paragraph, text)
 
 
-def add_list_item(document: Document, text: str, ordered: bool, level: int = 0) -> None:
+def add_list_item(
+    document: Document,
+    text: str,
+    ordered: bool,
+    level: int = 0,
+    num_id: Optional[int] = None,
+) -> None:
     """Render Markdown list item with Word native bullet/numbering styles."""
     style_name = list_style_name(ordered, level)
     try:
@@ -760,6 +808,8 @@ def add_list_item(document: Document, text: str, ordered: bool, level: int = 0) 
     paragraph.paragraph_format.space_before = Pt(0)
     paragraph.paragraph_format.space_after = Pt(3)
     paragraph.paragraph_format.line_spacing = 1.15
+    if ordered and num_id is not None:
+        apply_paragraph_num_id(paragraph, num_id, level)
     add_inline_runs(paragraph, text)
 
 
@@ -1138,18 +1188,38 @@ def blocks_to_docx(blocks: list[Block], md_path: Path, output_path: Path) -> lis
     configure_heading_styles(document)
     configure_list_styles(document)
 
+    # Contiguous ordered-list run shares one numId; break on any other block.
+    active_ol_num_id: Optional[int] = None
+
     for block in blocks:
         if isinstance(block, HeadingBlock):
+            active_ol_num_id = None
             add_heading(document, block.level, block.text)
         elif isinstance(block, ParagraphBlock):
+            active_ol_num_id = None
             add_paragraph(document, block.text)
         elif isinstance(block, ListItemBlock):
-            add_list_item(document, block.text, block.ordered, block.level)
+            if block.ordered:
+                if active_ol_num_id is None:
+                    active_ol_num_id = create_restart_num_id(document)
+                add_list_item(
+                    document,
+                    block.text,
+                    ordered=True,
+                    level=block.level,
+                    num_id=active_ol_num_id,
+                )
+            else:
+                active_ol_num_id = None
+                add_list_item(document, block.text, ordered=False, level=block.level)
         elif isinstance(block, TableBlock):
+            active_ol_num_id = None
             add_table(document, block.rows)
         elif isinstance(block, CodeBlock):
+            active_ol_num_id = None
             add_code_block(document, block.language, block.content)
         elif isinstance(block, MermaidBlock):
+            active_ol_num_id = None
             try:
                 png_path = render_mermaid(block.content, cache)
                 add_centered_image(document, png_path)
@@ -1157,16 +1227,20 @@ def blocks_to_docx(blocks: list[Block], md_path: Path, output_path: Path) -> lis
                 errors.append(f"Mermaid: {exc}")
                 add_code_block(document, "mermaid", block.content)
         elif isinstance(block, FigureBlock):
+            active_ol_num_id = None
             caption = f"**{block.label}**：{block.caption}"
             add_paragraph(document, caption)
             embed_image(document, md_dir, block.image_path, cache, errors)
         elif isinstance(block, ImageBlock):
+            active_ol_num_id = None
             if block.alt:
                 add_paragraph(document, block.alt)
             embed_image(document, md_dir, block.path, cache, errors)
         elif isinstance(block, BlockquoteBlock):
+            active_ol_num_id = None
             add_blockquote(document, block.text)
         elif isinstance(block, HRBlock):
+            active_ol_num_id = None
             add_horizontal_rule(document)
 
     output_path.parent.mkdir(parents=True, exist_ok=True)

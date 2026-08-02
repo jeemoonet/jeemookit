@@ -2,6 +2,7 @@
 name: txt-to-image
 description: >-
   为 Markdown 文档配图：结构图用 Mermaid、宣传场景图用 GenerateImage。
+  Cursor 环境上传/生成宣传图必须调用 GenerateImage，禁止其他方式落盘。
   宣传图存放 assets/。在用户编写设计文档、产品介绍时使用；导出 Word 配合 md-to-word。
 ---
 
@@ -47,6 +48,16 @@ description: >-
 
 ## 2. 宣传图（GenerateImage → assets/）
 
+### Cursor 环境强制约定
+
+在 **Cursor** 中制作/上传宣传图（PNG）时：
+
+- **必须**调用内置工具 `GenerateImage`，不得改用其他文生图 API、浏览器下载、外链抓取、手写/编造 base64 PNG 等方式落盘
+- 调用后以返回文件为准写入/引用文档同级 `assets/`；`filename` 建议用 `主题-简述.png`
+- 结构图仍用 Mermaid，不走 GenerateImage
+
+### 写法
+
 - 文档同目录建 `assets/`；生成后落盘再引用。
 - 一图一场景；`![中文场景说明](assets/xxx.png)` 必填 alt；可与同节 Mermaid 互补，不重复同一信息。
 
@@ -66,5 +77,6 @@ description: >-
 ## 检查清单
 
 - [ ] 结构图 = Mermaid；宣传图在 `assets/*.png`
+- [ ] Cursor 宣传图经 `GenerateImage` 生成（未用其他上传/抓取方式）
 - [ ] 引用路径存在
 - [ ] 交付 Word → 调用 `md-to-word`
